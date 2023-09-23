@@ -307,24 +307,73 @@ class Game:
         target = self.get(coord)
         if target is not None:
             target.mod_health(health_delta)
+            print('modded health')
             self.remove_dead(coord)
 
     def is_valid_move(self, coords : CoordPair) -> bool:
         """Validate a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
+        # Checks if coords are out of the board
         if not self.is_valid_coord(coords.src) or not self.is_valid_coord(coords.dst):
             return False
-        unit = self.get(coords.src)
-        if unit is None or unit.player != self.next_player:
+        # Check source coord
+        srcUnit = self.get(coords.src)
+        
+        # Checks if the current player is the one moving
+        if srcUnit is None or srcUnit.player != self.next_player:
             return False
-        unit = self.get(coords.dst)
-        return (unit is None)
+        
+        # Check destination coord
+        dstUnit = self.get(coords.dst)
+        
+        # Player to empty
+        if dstUnit is None: return True
+        
+        # Player to Enemy
+        if dstUnit.player != self.next_player: return True
+            
+        # Player to player (heal)
+        if srcUnit.repair_amount(dstUnit) > 0: return True
+        
+        # Player to self destruct
+        if srcUnit == dstUnit: return True
+        
+        return False
 
     def perform_move(self, coords : CoordPair) -> Tuple[bool,str]:
         """Validate and perform a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
         if self.is_valid_move(coords):
-            self.set(coords.dst,self.get(coords.src))
-            self.set(coords.src,None)
-            return (True,"")
+            dstUnit = self.get(coords.dst)
+            srcUnit = self.get(coords.src)
+
+            # Player to empty
+            if dstUnit is None:
+                self.set(coords.dst,self.get(coords.src))
+                self.set(coords.src,None)
+                return (True,"")
+
+            # Player to Enemy
+            if dstUnit.player != self.next_player:
+                dmgFromSrc = srcUnit.damage_amount(dstUnit)
+                self.mod_health(coords.dst, -dmgFromSrc)
+                
+                dmgFromDst = dstUnit.damage_amount(srcUnit)
+                self.mod_health(coords.src, -dmgFromDst)
+                return (True,"")
+
+            # Player to Player (Heal)
+            if srcUnit.repair_amount(dstUnit) > 0:
+                self.mod_health(coords.dst, srcUnit.repair_amount(dstUnit))
+                return (True, "")
+
+            # Player to Self (Destruct)
+            if srcUnit == dstUnit:
+                aoe = coords.dst.iter_range(1)
+                for coord in aoe:
+                    print(coord)
+                    self.mod_health(coord, -2)
+                self.mod_health(coords.src, -9)
+                return (True, "")
+            
         return (False,"invalid move")
 
     def next_turn(self):
