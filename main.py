@@ -307,29 +307,52 @@ class Game:
         target = self.get(coord)
         if target is not None:
             target.mod_health(health_delta)
-            print('modded health')
             self.remove_dead(coord)
 
     def is_valid_move(self, coords : CoordPair) -> bool:
         """Validate a move expressed as a CoordPair. TODO: WRITE MISSING CODE!!!"""
-        # Checks if coords are out of the board
-        if not self.is_valid_coord(coords.src) or not self.is_valid_coord(coords.dst):
+        # Checks if coords are out of the board and is adjacent to player
+        if not self.is_valid_coord(coords.src)\
+        or not self.is_valid_coord(coords.dst)\
+        or (coords.dst not in coords.src.iter_adjacent() and coords.dst != coords.src):
             return False
-        # Check source coord
+        
+        # Get source coord
         srcUnit = self.get(coords.src)
         
         # Checks if the current player is the one moving
         if srcUnit is None or srcUnit.player != self.next_player:
             return False
         
-        # Check destination coord
+        # Get destination coord
         dstUnit = self.get(coords.dst)
-        
+
         # Player to empty
-        if dstUnit is None: return True
+        if dstUnit is None: 
+            # Techs and Viruses can move while in combat
+            if srcUnit.type.name in ['Virus', 'Tech']:
+                return True
+            
+            # Check for enemy units in adjacent (in combat)
+            for adj in coords.src.iter_adjacent():
+                if self.get(adj) and self.get(adj).player != self.next_player:
+                    return False
+            
+            # Cannot move backwards
+            if self.next_player.name == 'Attacker':
+                # only move up and left
+                if coords.src.row < coords.dst.row or coords.src.col < coords.dst.col:
+                    return False
+            else:
+                # only move down and right
+                if coords.src.row > coords.dst.row or coords.src.col > coords.dst.col:
+                    return False
+            
+            return True
         
         # Player to Enemy
-        if dstUnit.player != self.next_player: return True
+        if dstUnit.player != self.next_player:
+            return True
             
         # Player to player (heal)
         if srcUnit.repair_amount(dstUnit) > 0: return True
@@ -369,9 +392,8 @@ class Game:
             if srcUnit == dstUnit:
                 aoe = coords.dst.iter_range(1)
                 for coord in aoe:
-                    print(coord)
                     self.mod_health(coord, -2)
-                self.mod_health(coords.src, -9)
+                self.mod_health(coords.src, -9) # seppukku
                 return (True, "")
             
         return (False,"invalid move")
@@ -614,13 +636,20 @@ def main():
     # create a new game
     game = Game(options=options)
 
+    # Create output file
+    file = open(f"gameTrace-{options.alpha_beta}-{options.max_time}-{options.max_turns}.txt", "w")
+    file.write(f"Value of the timeout: {options.max_time}\nMax number of turns: {options.max_turns}\nAlpha-Beta: {options.alpha_beta}\nPlay Mode: {options.game_type}\nHeuristic: N/A")
+
     # the main game loop
     while True:
         print()
         print(game)
+        file.write(game.to_string())
+        
         winner = game.has_winner()
         if winner is not None:
-            print(f"{winner.name} wins!")
+            print(f"{winner.name} wins in {game.turns_played} turn(s)!")
+            file.write(f"{winner.name} wins in {game.turns_played} turn(s)!")
             break
         if game.options.game_type == GameType.AttackerVsDefender:
             game.human_turn()
@@ -636,7 +665,7 @@ def main():
             else:
                 print("Computer doesn't know what to do!!!")
                 exit(1)
-
+    file.close()
 ##############################################################################################################
 
 if __name__ == '__main__':
