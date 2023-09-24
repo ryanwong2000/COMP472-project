@@ -367,7 +367,7 @@ class Game:
         if self.is_valid_move(coords):
             dstUnit = self.get(coords.dst)
             srcUnit = self.get(coords.src)
-
+            
             # Player to empty
             if dstUnit is None:
                 self.set(coords.dst,self.get(coords.src))
@@ -471,9 +471,10 @@ class Game:
                 (success,result) = self.perform_move(mv)
                 if success:
                     print(f"Player {self.next_player.name}: ",end='')
-                    print(result)
+                    print(result, end='')
                     self.next_turn()
-                    break
+                    return mv
+                    # break
                 else:
                     print("The move is not valid! Try again.")
 
@@ -638,7 +639,7 @@ def main():
 
     # Create output file
     file = open(f"gameTrace-{options.alpha_beta}-{options.max_time}-{options.max_turns}.txt", "w")
-    file.write(f"Value of the timeout: {options.max_time}\nMax number of turns: {options.max_turns}\nAlpha-Beta: {options.alpha_beta}\nPlay Mode: {options.game_type}\nHeuristic: N/A")
+    file.write(f"Value of the timeout: {options.max_time}\nMax number of turns: {options.max_turns}\nAlpha-Beta: {options.alpha_beta}\nPlay Mode: {options.game_type}\nHeuristic: N/A\n\n")
 
     # the main game loop
     while True:
@@ -652,7 +653,9 @@ def main():
             file.write(f"{winner.name} wins in {game.turns_played} turn(s)!")
             break
         if game.options.game_type == GameType.AttackerVsDefender:
-            game.human_turn()
+            move = game.human_turn()
+            print(f"Move from {move.src} to {move.dst}")
+            file.write(f"Move from {move.src} to {move.dst}\n")
         elif game.options.game_type == GameType.AttackerVsComp and game.next_player == Player.Attacker:
             game.human_turn()
         elif game.options.game_type == GameType.CompVsDefender and game.next_player == Player.Defender:
