@@ -1,1 +1,0 @@
-mv = self.read_move()
