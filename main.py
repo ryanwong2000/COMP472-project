@@ -222,7 +222,7 @@ class Options:
     min_depth : int | None = 2
     max_time : float | None = 5.0
     game_type : GameType = GameType.AttackerVsDefender
-    alpha_beta : bool = True
+    alpha_beta : None = True
     max_turns : int | None = 100
     randomize_moves : bool = True
     broker : str | None = None
@@ -611,6 +611,8 @@ def main():
     parser.add_argument('--max_time', type=float, help='maximum search time')
     parser.add_argument('--game_type', type=str, default="manual", help='game type: auto|attacker|defender|manual')
     parser.add_argument('--broker', type=str, help='play via a game broker')
+    parser.add_argument('--max_turns', type=int, help='maximum number of turns')
+    parser.add_argument('--alpha_beta', help='type False this to turn off alpha_beta')
     args = parser.parse_args()
 
     # parse the game type
@@ -633,6 +635,10 @@ def main():
         options.max_time = args.max_time
     if args.broker is not None:
         options.broker = args.broker
+    if args.max_turns is not None:
+        options.max_turns = args.max_turns
+    if args.alpha_beta is not None:
+        options.alpha_beta = False if args.alpha_beta.lower() == 'false' else True
 
     # create a new game
     game = Game(options=options)
