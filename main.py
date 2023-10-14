@@ -551,10 +551,117 @@ class Game:
         else:
             return (0, None, 0)
 
+    def heuristic_score(self, heuristic_number: int) -> int:
+        """Returns the heuristic score of the current game state."""
+
+        def count_units(units: list[Unit]):
+            unit_counts = {
+                UnitType.AI: 0,
+                UnitType.Tech: 0,
+                UnitType.Virus: 0,
+                UnitType.Program: 0,
+                UnitType.Firewall: 0,
+            }
+            for _, unit in units:
+                unit_counts[unit.type] += 1
+            return unit_counts
+
+        player_units = self.player_units(self.next_player)
+        # player_units = [unit for (_, unit) in self.player_units(self.next_player)]
+        other_player_units = self.player_units(self.next_player.next())
+
+        player_unit_counts = count_units(player_units)
+        other_player_unit_counts = count_units(other_player_units)
+
+        ai, tech, virus, program, firewall = (
+            player_unit_counts[UnitType.AI],
+            player_unit_counts[UnitType.Tech],
+            player_unit_counts[UnitType.Virus],
+            player_unit_counts[UnitType.Program],
+            player_unit_counts[UnitType.Firewall],
+        )
+
+        ai_other, tech_other, virus_other, program_other, firewall_other = (
+            other_player_unit_counts[UnitType.AI],
+            other_player_unit_counts[UnitType.Tech],
+            other_player_unit_counts[UnitType.Virus],
+            other_player_unit_counts[UnitType.Program],
+            other_player_unit_counts[UnitType.Firewall],
+        )
+
+        match heuristic_number:
+            case 0:
+                heuristic_score = (
+                    3 * (virus + tech + firewall + program)
+                    + 9999 * ai
+                    - 3 * (virus_other + tech_other +
+                           firewall_other + program_other)
+                    - 9999 * ai_other
+                )
+            case 1:
+                heuristic_score = (
+                    6 * (virus + tech)
+                    + 3 * (firewall + program)
+                    + 9999 * ai
+                    - 6 * (virus_other + tech_other)
+                    - 3 * (firewall_other + program_other)
+                    - 9999 * ai_other
+                )
+            case _:
+                raise ValueError("Invalid heuristic number")
+
+        return heuristic_score
+
+    def minimax(
+        self, maximize: bool, depth: int
+    ) -> Tuple[int, CoordPair | None, float]:
+        best_move = None
+
+        # If we are at the end of the game or at the max depth, return the heuristic score
+        if depth == 0 or self.is_finished():
+            return (self.heuristic_score(0), best_move, 0)
+
+        # If we are maximizing
+        if maximize:
+            max_score = MIN_HEURISTIC_SCORE
+            for move in self.move_candidates():
+                # Create a new game state
+                child_game_state = self.clone()
+                child_game_state.perform_move(move)
+                # Call minimax recursively
+                (score, _, _) = child_game_state.minimax(False, depth - 1)
+                # Update max_score
+                if score > max_score:
+                    max_score = score
+                    best_move = move
+
+        # If we are minimizing
+        else:
+            min_score = MAX_HEURISTIC_SCORE
+            for move in self.move_candidates():
+                # Create a new game state
+                child_game_state = self.clone()
+                child_game_state.perform_move(move)
+                # Call minimax recursively
+                (score, _, _) = child_game_state.minimax(
+                    True,
+                    depth - 1,
+                )
+                # Update min_score
+                if score < min_score:
+                    min_score = score
+                    best_move = move
+
+        return (0, best_move, 0)
+
     def suggest_move(self) -> CoordPair | None:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         start_time = datetime.now()
-        (score, move, avg_depth) = self.random_move()
+        # (score, move, avg_depth) = self.random_move()
+
+        (score, move, avg_depth) = self.minimax(
+            True, self.options.max_depth)
+
         elapsed_seconds = (datetime.now() - start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
         print(f"Heuristic score: {score}")
