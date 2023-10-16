@@ -183,7 +183,7 @@ class CoordPair:
 
     def to_string(self) -> str:
         """Text representation of a CoordPair."""
-        return self.src.to_string() + " " + self.dst.to_string()
+        return f"Move from {self.src.to_string()} to {self.dst.to_string()}"
 
     def __str__(self) -> str:
         """Text representation of a CoordPair."""
@@ -255,6 +255,8 @@ class Stats:
     total_seconds: float = 0.0
     cumulative_evals: int = 0
     start_time: datetime = datetime.now()
+    heuristic_score: int = 0
+    elapsed_seconds: float = 0.0
 
 ##############################################################################################################
 
@@ -790,18 +792,26 @@ class Game:
 
         elapsed_seconds = (datetime.now() - self.stats.start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
-
+        
+        total_evals = sum(self.stats.evaluations_per_depth.values())
+        
+        self.stats.heuristic_score = score
+        self.stats.elapsed_seconds = elapsed_seconds
+        
+        print(move)
         print(f"Heuristic score: {score}")
-        print(f"Average recursive depth: {avg_depth:0.1f}")
+        print(f"Cumulative evals: {total_evals}")
+        
         print(f"Evals per depth: ", end="")
         for k in sorted(self.stats.evaluations_per_depth.keys()):
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ", end="")
         print()
-        total_evals = sum(self.stats.evaluations_per_depth.values())
-        print(f"Cumulative evals: {total_evals}")
+        print(f"Cumulative % evals by depth: ", end="")
+        for k in sorted(self.stats.evaluations_per_depth.keys()):
+            print(f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ", end="")
+        print()
         if self.stats.total_seconds > 0:
-            print(
-                f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
+            print(f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
         return move
 
@@ -930,6 +940,7 @@ def main():
         print()
         print(game)
         file.write(game.to_string())
+        file.write("\n")
 
         winner = game.has_winner()
         if winner is not None:
@@ -941,10 +952,7 @@ def main():
             move = game.human_turn()
             print(f"Move from {move.src} to {move.dst}")
             file.write(f"Move from {move.src} to {move.dst}\n")
-        elif (
-            game.options.game_type == GameType.AttackerVsComp
-            and game.next_player == Player.Attacker
-        ):
+        elif (game.options.game_type == GameType.AttackerVsComp and game.next_player == Player.Attacker):
             game.human_turn()
         elif (
             game.options.game_type == GameType.CompVsDefender
@@ -954,10 +962,30 @@ def main():
         else:
             player = game.next_player
             move = game.computer_turn()
+            
+            total_evals = sum(game.stats.evaluations_per_depth.values())
+            file.write(move.to_string())
+            file.write("\n")
+            file.write(f"Heuristic score: {game.stats.heuristic_score} \n")
+            file.write(f"Cumulative evals: {total_evals} \n")
+            
+            file.write("Evals per depth: ")
+            for k in sorted(game.stats.evaluations_per_depth.keys()):
+                file.write(f"{k}:{game.stats.evaluations_per_depth[k]} ")
+            file.write("\n")
+            file.write(f"Cumulative % evals by depth: ")
+            for k in sorted(game.stats.evaluations_per_depth.keys()):
+                file.write(f"{k}:{game.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ")
+            file.write("\n")
+            if game.stats.total_seconds > 0:
+                file.write(f"Eval perf.: {total_evals/game.stats.total_seconds/1000:0.1f}k/s \n")
+            file.write(f"Elapsed time: {game.stats.elapsed_seconds:0.1f}s \n")
+            
             if move is not None:
                 game.post_move_to_broker(move)
             else:
                 print("Computer doesn't know what to do!!!")
+                file.write("Computer doesn't know what to do!!!")
                 exit(1)
     file.close()
 
