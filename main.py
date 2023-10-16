@@ -798,8 +798,7 @@ class Game:
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ", end="")
         print()
         total_evals = sum(self.stats.evaluations_per_depth.values())
-        self.stats.cumulative_evals += total_evals
-        print(f"Cumulative evals: {self.stats.cumulative_evals}")
+        print(f"Cumulative evals: {total_evals}")
         if self.stats.total_seconds > 0:
             print(
                 f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
