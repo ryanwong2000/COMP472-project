@@ -254,7 +254,7 @@ class Stats:
     evaluations_per_depth: dict[int, int] = field(default_factory=dict)
     total_seconds: float = 0.0
     cumulative_evals: int = 0
-
+    start_time: datetime = datetime.now()
 
 ##############################################################################################################
 
@@ -642,7 +642,7 @@ class Game:
         return heuristic_score
 
     def minimax(self, maximize: bool, depth: int) -> Tuple[int, CoordPair | None, float]:
-        start_time = datetime.now()
+        # start_time = datetime.now()
 
         # self.stats.total_seconds = (
         #     datetime().now() - start_time).total_seconds()
@@ -656,15 +656,26 @@ class Game:
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
             for move in self.move_candidates():
+
+                # start_time = datetime.now()
+
+
+
                 # check if we have enough time
                 # print((datetime.now() - start_time).total_seconds())
-                self.stats.total_seconds += (
-                    datetime.now() - start_time
-                ).total_seconds()
+                # self.stats.total_seconds += (
+                #     datetime.now() - start_time
+                # ).total_seconds()
+
                 # if self.stats.total_seconds > min(
                 #     self.options.max_time - 1, self.options.max_time * 0.70
                 # ):
                 #     return (max_score, best_move, 0)
+                elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
+                if elapsed_time > min(
+                    self.options.max_time - 1, self.options.max_time * 0.70
+                ):
+                    return (max_score, best_move, 0)
 
                 self.stats.evaluations_per_depth[depth] += 1
                 # print(f"MaxMove: {move} at depth {depth}")
@@ -688,14 +699,18 @@ class Game:
             for move in self.move_candidates():
                 # check if we have enough time
                 # print((datetime.now() - start_time).total_seconds())
-                self.stats.total_seconds += (
-                    datetime.now() - start_time
-                ).total_seconds()
+                # self.stats.total_seconds += (
+                #     datetime.now() - start_time
+                # ).total_seconds()
                 # if self.stats.total_seconds > min(
                 #     self.options.max_time - 1, self.options.max_time * 0.70
                 # ):
                 #     return (min_score, best_move, 0)
-
+                elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
+                if elapsed_time > min(
+                    self.options.max_time - 1, self.options.max_time * 0.70
+                ):
+                    return (min_score, best_move, 0)
                 self.stats.evaluations_per_depth[depth] += 1
                 # print(f"MiniMove: {move} at depth {depth}")
 
@@ -727,6 +742,12 @@ class Game:
             # for move in self.move_candidates():
             for move in possible_moves:
                 # check if we have enough time
+                elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
+                if elapsed_time > min(
+                    self.options.max_time - 1, self.options.max_time * 0.70
+                ):
+                    return (max_score, best_move, 0)
+
 
                 self.stats.evaluations_per_depth[depth] += 1
 
@@ -754,6 +775,13 @@ class Game:
             random.shuffle(possible_moves)
             # for move in self.move_candidates():
             for move in possible_moves:
+                elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
+                if elapsed_time > min(
+                    self.options.max_time - 1, self.options.max_time * 0.70
+                ):
+                    return (min_score, best_move, 0)
+                self.stats.evaluations_per_depth[depth] += 1
+
                 self.stats.evaluations_per_depth[depth] += 1
                 # print(f"MiniMove: {move} at depth {depth}")
 
@@ -776,9 +804,7 @@ class Game:
     def suggest_move(self) -> CoordPair | None:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         self.stats.total_seconds = 0
-        start_time = datetime.now()
-
-        # elapsed_time = start_time
+        self.stats.start_time = datetime.now()
 
         # (score, move, avg_depth) = self.random_move()
 
@@ -789,7 +815,7 @@ class Game:
             (score, move, avg_depth) = self.minimax(
                 self.next_player is Player.Attacker, self.options.max_depth)
 
-        elapsed_seconds = (datetime.now() - start_time).total_seconds()
+        elapsed_seconds = (datetime.now() - self.stats.start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
 
         print(f"Heuristic score: {score}")
