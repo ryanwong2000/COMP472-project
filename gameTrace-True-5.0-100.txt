@@ -18,773 +18,467 @@ Turns played: 1
 
     0   1   2   3   4  
 A: dA9 dT9 dF9  .   .  
-B: dT9 dP9  .   .   .  
-C: dF9  .   .  aF9 aP9 
-D:  .   .   .   .  aV9 
+B: dT9 dP9  .   .  aP9 
+C: dF9  .   .   .   .  
+D:  .   .   .  aF9 aV9 
 E:  .   .  aP9 aV9 aA9 
 Next player: Attacker
 Turns played: 2
 
     0   1   2   3   4  
 A: dA9 dT9 dF9  .   .  
-B: dT9 dP9  .   .   .  
-C:  .   .   .  aF9 aP9 
-D: dF9  .   .   .  aV9 
+B: dT9 dP9  .   .  aP9 
+C:  .  dF9  .   .   .  
+D:  .   .   .  aF9 aV9 
 E:  .   .  aP9 aV9 aA9 
 Next player: Defender
 Turns played: 3
 
     0   1   2   3   4  
 A: dA9 dT9 dF9  .   .  
-B: dT9 dP9  .   .   .  
-C:  .   .  aF9  .  aP9 
-D: dF9  .   .   .  aV9 
+B: dT9 dP9  .   .  aP9 
+C:  .  dF9  .  aF9  .  
+D:  .   .   .   .  aV9 
 E:  .   .  aP9 aV9 aA9 
 Next player: Attacker
 Turns played: 4
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B: dT9  .   .   .   .  
-C:  .  dP9 aF9  .  aP9 
-D: dF9  .   .   .  aV9 
+A: dA9 dT7  .   .   .  
+B: dT9 dP7  .   .  aP9 
+C:  .  dF9  .  aF9  .  
+D:  .   .   .   .  aV9 
 E:  .   .  aP9 aV9 aA9 
 Next player: Defender
 Turns played: 5
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B: dT9  .   .   .   .  
-C:  .  dP9 aF9  .  aP9 
-D: dF9  .   .   .  aV9 
-E:  .  aP9  .  aV9 aA9 
+A: dA9 dT7  .   .  aP9 
+B: dT9 dP7  .   .   .  
+C:  .  dF9  .  aF9  .  
+D:  .   .   .   .  aV9 
+E:  .   .  aP9 aV9 aA9 
 Next player: Attacker
 Turns played: 6
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP9 aF9  .  aP9 
-D: dF9  .   .   .  aV9 
-E:  .  aP9  .  aV9 aA9 
+A: dA9 dT8  .   .  aP9 
+B: dT9 dP7  .   .   .  
+C:  .  dF9  .  aF9  .  
+D:  .   .   .   .  aV9 
+E:  .   .  aP9 aV9 aA9 
 Next player: Defender
 Turns played: 7
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP9 aF9 aP9  .  
-D: dF9  .   .   .  aV9 
-E:  .  aP9  .  aV9 aA9 
+A: dA9 dT8  .   .  aP9 
+B: dT9 dP7  .   .   .  
+C:  .  dF9  .  aF9 aV9 
+D:  .   .   .   .   .  
+E:  .   .  aP9 aV9 aA9 
 Next player: Attacker
 Turns played: 8
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF8 aP9  .  
-D: dF9  .   .   .  aV9 
-E:  .  aP9  .  aV9 aA9 
+A: dA9 dT9  .   .  aP9 
+B: dT9 dP7  .   .   .  
+C:  .  dF9  .  aF9 aV9 
+D:  .   .   .   .   .  
+E:  .   .  aP9 aV9 aA9 
 Next player: Defender
 Turns played: 9
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF8 aP9  .  
-D: dF9  .   .   .  aV9 
-E:  .  aP9 aV9  .  aA9 
+A: dA9 dT9  .  aP9  .  
+B: dT9 dP7  .   .   .  
+C:  .  dF9  .  aF9 aV9 
+D:  .   .   .   .   .  
+E:  .   .  aP9 aV9 aA9 
 Next player: Attacker
 Turns played: 10
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF8 aP9  .  
-D:  .  dF9  .   .  aV9 
-E:  .  aP9 aV9  .  aA9 
+A: dA9 dT9  .  aP9  .  
+B: dT9 dP9  .   .   .  
+C:  .  dF9  .  aF9 aV9 
+D:  .   .   .   .   .  
+E:  .   .  aP9 aV9 aA9 
 Next player: Defender
 Turns played: 11
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF8 aP9  .  
-D:  .  dF8  .   .  aV9 
-E:  .  aP8 aV9  .  aA9 
+A: dA9 dT9  .  aP9  .  
+B: dT9 dP9  .   .   .  
+C:  .  dF9  .  aF9  .  
+D:  .   .   .   .  aV9 
+E:  .   .  aP9 aV9 aA9 
 Next player: Attacker
 Turns played: 12
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP9 aF8 aP9  .  
-D:  .  dF8  .   .  aV9 
-E:  .  aP8 aV9  .  aA9 
+A: dA9 dT9  .  aP9  .  
+B:  .  dP9  .   .   .  
+C: dT9 dF9  .  aF9  .  
+D:  .   .   .   .  aV9 
+E:  .   .  aP9 aV9 aA9 
 Next player: Defender
 Turns played: 13
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP9 aF8 aP9  .  
-D:  .  dF8  .  aV9  .  
-E:  .  aP8 aV9  .  aA9 
+A: dA9 dT9  .  aP9  .  
+B:  .  dP9  .   .   .  
+C: dT9 dF9  .  aF9  .  
+D:  .   .   .  aV9 aV9 
+E:  .   .  aP9  .  aA9 
 Next player: Attacker
 Turns played: 14
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF8  .  aV9  .  
-E:  .  aP8 aV9  .  aA9 
+A: dA9 dT9  .  aP9  .  
+B:  .   .  dP9  .   .  
+C: dT9 dF9  .  aF9  .  
+D:  .   .   .  aV9 aV9 
+E:  .   .  aP9  .  aA9 
 Next player: Defender
 Turns played: 15
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF8 aV9 aV9  .  
-E:  .  aP8  .   .  aA9 
+A: dA9 dT9  .  aP9  .  
+B:  .   .  dP9  .   .  
+C: dT9 dF9  .  aF9  .  
+D:  .   .   .  aV9 aV9 
+E:  .   .  aP9 aA9  .  
 Next player: Attacker
 Turns played: 16
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7 aV8 aV9  .  
-E:  .  aP8  .   .  aA9 
+A:  .  dT9  .  aP9  .  
+B: dA9  .  dP9  .   .  
+C: dT9 dF9  .  aF9  .  
+D:  .   .   .  aV9 aV9 
+E:  .   .  aP9 aA9  .  
 Next player: Defender
 Turns played: 17
 
     0   1   2   3   4  
-A: dA9 dT9 dF9  .   .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7 aV8 aV9 aA9 
-E:  .  aP8  .   .   .  
+A:  .  dT9  .  aP9  .  
+B: dA9  .  dP9  .   .  
+C: dT9 dF9  .  aF9  .  
+D:  .   .   .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Attacker
 Turns played: 18
 
     0   1   2   3   4  
-A: dA9 dT9  .  dF9  .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7 aV8 aV9 aA9 
-E:  .  aP8  .   .   .  
+A:  .  dT9  .  aP9  .  
+B: dA9  .  dP9  .   .  
+C:  .  dF9  .  aF9  .  
+D: dT9  .   .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Defender
 Turns played: 19
 
     0   1   2   3   4  
-A: dA9 dT9  .  dF9  .  
-B:  .  dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7 aV8  .  aA9 
-E:  .  aP8  .  aV9  .  
+A:  .  dT9  .  aP9  .  
+B: dA9  .  dP9 aF9  .  
+C:  .  dF9  .   .   .  
+D: dT9  .   .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Attacker
 Turns played: 20
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7 aV8  .  aA9 
-E:  .  aP8  .  aV9  .  
+A:  .  dT9  .  aP9  .  
+B: dA9  .  dP8 aF8  .  
+C:  .  dF9  .   .   .  
+D: dT9  .   .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Defender
 Turns played: 21
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7  .   .  aA9 
-E:  .  aP8 aV8 aV9  .  
+A:  .  dT9  .  aP9  .  
+B: dA9  .  dP8 aF8  .  
+C:  .  dF9  .  aV9  .  
+D: dT9  .   .   .  aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Attacker
 Turns played: 22
 
     0   1   2   3   4  
-A:  .   .  dT9 dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF7  .   .  aA9 
-E:  .  aP8 aV8 aV9  .  
+A:  .   .  dT9 aP9  .  
+B: dA9  .  dP8 aF8  .  
+C:  .  dF9  .  aV9  .  
+D: dT9  .   .   .  aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Defender
 Turns played: 23
 
     0   1   2   3   4  
-A:  .   .  dT9 dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF6  .   .  aA9 
-E:  .  aP7 aV8 aV9  .  
+A:  .   .  dT9 aP9  .  
+B: dA9  .  dP8 aF8  .  
+C:  .  dF9  .   .   .  
+D: dT9  .   .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Attacker
 Turns played: 24
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9  .  
-D:  .  dF6  .   .  aA9 
-E:  .  aP7 aV8 aV9  .  
+A:  .   .  dT9 aP9  .  
+B: dA9  .  dP8 aF8  .  
+C:  .   .   .   .   .  
+D: dT9 dF9  .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Defender
 Turns played: 25
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9 aA9 
-D:  .  dF6  .   .   .  
-E:  .  aP7 aV8 aV9  .  
+A:  .   .  dT6 aP8  .  
+B: dA9  .  dP8 aF8  .  
+C:  .   .   .   .   .  
+D: dT9 dF9  .  aV9 aV9 
+E:  .  aP9  .  aA9  .  
 Next player: Attacker
 Turns played: 26
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9 aA9 
-D:  .  dF5  .   .   .  
-E:  .  aP6 aV8 aV9  .  
+A:  .   .  dT6 aP8  .  
+B: dA9  .  dP8 aF8  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9 aV9 
+E:  .  aP7  .  aA9  .  
 Next player: Defender
 Turns played: 27
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP8 aF7 aP9 aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6  .  aV9  .  
+A:  .   .  dT6 aP8  .  
+B: dA9  .  dP8 aF8  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9 aV9 
+E: aP7  .   .  aA9  .  
 Next player: Attacker
 Turns played: 28
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .   .   .  
-C:  .  dP9 aF7 aP9 aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6  .  aV9  .  
+A:  .   .  dT6 aP8  .  
+B: dA9  .  dP9 aF8  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9 aV9 
+E: aP7  .   .  aA9  .  
 Next player: Defender
 Turns played: 29
 
     0   1   2   3   4  
-A:  .  dT9  .  dF9  .  
-B: dA9 dT9  .  aP9  .  
-C:  .  dP9 aF7  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6  .  aV9  .  
+A:  .   .  dT6 aP8  .  
+B: dA9  .  dP9 aF8  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9  .  
+E: aP7  .   .  aA9 aV9 
 Next player: Attacker
 Turns played: 30
 
     0   1   2   3   4  
-A:  .  dT9  .  dF8  .  
-B: dA9 dT9  .  aP8  .  
-C:  .  dP9 aF7  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6  .  aV9  .  
+A:  .   .  dT6 aP8  .  
+B: dA9  .  dP8 aF7  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9  .  
+E: aP7  .   .  aA9 aV9 
 Next player: Defender
 Turns played: 31
 
     0   1   2   3   4  
-A:  .  dT9  .  dF8  .  
-B: dA9 dT9  .  aP8  .  
-C:  .  dP9 aF7  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .   .  dT4  .   .  
+B: dA9  .  dP6 aF5  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9  .  
+E: aP7  .   .  aA9 aV9 
 Next player: Attacker
 Turns played: 32
 
     0   1   2   3   4  
-A:  .  dT9  .  dF8  .  
-B:  .  dT9  .  aP8  .  
-C: dA9 dP9 aF7  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B: dA9  .  dP6 aF5  .  
+C:  .   .   .   .   .  
+D: dT7  .   .  aV9  .  
+E: aP7  .   .  aA9 aV9 
 Next player: Defender
 Turns played: 33
 
     0   1   2   3   4  
-A:  .  dT9  .  dF8  .  
-B:  .  dT9  .  aP8  .  
-C: dA9 dP8 aF6  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B: dA9  .  dP6 aF5  .  
+C:  .   .   .   .   .  
+D: dT7  .   .   .  aV9 
+E: aP7  .   .  aA9 aV9 
 Next player: Attacker
 Turns played: 34
 
     0   1   2   3   4  
-A:  .  dT9  .  dF8  .  
-B:  .   .  dT9 aP8  .  
-C: dA9 dP8 aF6  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B:  .  dA9 dP6 aF5  .  
+C:  .   .   .   .   .  
+D: dT7  .   .   .  aV9 
+E: aP7  .   .  aA9 aV9 
 Next player: Defender
 Turns played: 35
 
     0   1   2   3   4  
-A:  .  dT9  .  dF7  .  
-B:  .   .  dT9 aP7  .  
-C: dA9 dP8 aF6  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B:  .  dA9 dP6 aF5  .  
+C:  .   .   .   .   .  
+D: dT7  .   .   .  aV9 
+E: aP7  .  aA9  .  aV9 
 Next player: Attacker
 Turns played: 36
 
     0   1   2   3   4  
-A:  .   .  dT9 dF7  .  
-B:  .   .  dT9 aP7  .  
-C: dA9 dP8 aF6  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B:  .   .  dP6 aF5  .  
+C:  .  dA9  .   .   .  
+D: dT7  .   .   .  aV9 
+E: aP7  .  aA9  .  aV9 
 Next player: Defender
 Turns played: 37
 
     0   1   2   3   4  
-A:  .   .  dT9 dF6  .  
-B:  .   .  dT9 aP6  .  
-C: dA9 dP8 aF6  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B:  .   .  dP5 aF4  .  
+C:  .  dA9  .   .   .  
+D: dT7  .   .   .  aV9 
+E: aP7  .  aA9  .  aV9 
 Next player: Attacker
 Turns played: 38
 
     0   1   2   3   4  
-A:  .  dT9  .  dF6  .  
-B:  .   .  dT9 aP6  .  
-C: dA9 dP8 aF6  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B:  .   .  dP5 aF4  .  
+C: dT7 dA9  .   .   .  
+D:  .   .   .   .  aV9 
+E: aP7  .  aA9  .  aV9 
 Next player: Defender
 Turns played: 39
 
     0   1   2   3   4  
-A:  .  dT9  .  dF6  .  
-B:  .   .  dT8 aP6  .  
-C: dA9 dP8 aF5  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A:  .  dT4  .   .   .  
+B:  .   .  dP5 aF4  .  
+C: dT7 dA9  .   .   .  
+D: aP7  .   .   .  aV9 
+E:  .   .  aA9  .  aV9 
 Next player: Attacker
 Turns played: 40
 
     0   1   2   3   4  
-A:  .  dT9 dT8 dF6  .  
-B:  .   .   .  aP6  .  
-C: dA9 dP8 aF5  .  aA9 
-D:  .  dF5 aV8  .   .  
-E:  .  aP6 aV9  .   .  
+A: dT4  .   .   .   .  
+B:  .   .  dP5 aF4  .  
+C: dT7 dA9  .   .   .  
+D: aP7  .   .   .  aV9 
+E:  .   .  aA9  .  aV9 
 Next player: Defender
 Turns played: 41
 
     0   1   2   3   4  
-A:  .  dT9 dT8 dF6  .  
-B:  .   .   .  aP6  .  
-C: dA9 dP8 aF5  .  aA9 
-D:  .  dF5  .  aV8  .  
-E:  .  aP6 aV9  .   .  
+A: dT4  .   .   .   .  
+B:  .   .  dP5 aF4  .  
+C: dT7 dA9  .   .   .  
+D: aP7  .   .   .  aV9 
+E:  .  aA9  .   .  aV9 
 Next player: Attacker
 Turns played: 42
 
     0   1   2   3   4  
-A:  .   .  dT8 dF6  .  
-B:  .  dT9  .  aP6  .  
-C: dA9 dP8 aF5  .  aA9 
-D:  .  dF5  .  aV8  .  
-E:  .  aP6 aV9  .   .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT7 dA9  .   .   .  
+D: aP7  .   .   .  aV9 
+E:  .  aA9  .   .  aV9 
 Next player: Defender
 Turns played: 43
 
     0   1   2   3   4  
-A:  .   .  dT8 dF6  .  
-B:  .  dT9  .  aP6  .  
-C: dA9 dP8 aF5  .  aA9 
-D:  .  dF5  .  aV8  .  
-E:  .  aP6  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT4 dA9  .   .   .  
+D: aP6  .   .   .  aV9 
+E:  .  aA9  .   .  aV9 
 Next player: Attacker
 Turns played: 44
 
     0   1   2   3   4  
-A:  .  dT9 dT8 dF6  .  
-B:  .   .   .  aP6  .  
-C: dA9 dP8 aF5  .  aA9 
-D:  .  dF5  .  aV8  .  
-E:  .  aP6  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT5 dA9  .   .   .  
+D: aP6  .   .   .  aV9 
+E:  .  aA9  .   .  aV9 
 Next player: Defender
 Turns played: 45
 
     0   1   2   3   4  
-A:  .  dT9 dT8 dF6  .  
-B:  .   .   .  aP6  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF5  .  aV8  .  
-E:  .  aP6  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT5 dA9  .   .   .  
+D: aP6  .   .  aV9  .  
+E:  .  aA9  .   .  aV9 
 Next player: Attacker
 Turns played: 46
 
     0   1   2   3   4  
-A:  .  dT9  .  dF6  .  
-B:  .   .  dT8 aP6  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF5  .  aV8  .  
-E:  .  aP6  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT5  .  dA9  .   .  
+D: aP6  .   .  aV9  .  
+E:  .  aA9  .   .  aV9 
 Next player: Defender
 Turns played: 47
 
     0   1   2   3   4  
-A:  .  dT9  .  dF6  .  
-B:  .   .  dT8 aP6  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF5  .   .  aV8 
-E:  .  aP6  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT5  .  dA9  .   .  
+D: aP6  .   .  aV9  .  
+E: aA9  .   .   .  aV9 
 Next player: Attacker
 Turns played: 48
 
     0   1   2   3   4  
-A:  .   .  dT9 dF6  .  
-B:  .   .  dT8 aP6  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF5  .   .  aV8 
-E:  .  aP6  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT5  .   .  dA9  .  
+D: aP6  .   .  aV9  .  
+E: aA9  .   .   .  aV9 
 Next player: Defender
 Turns played: 49
 
     0   1   2   3   4  
-A:  .   .  dT9 dF6  .  
-B:  .   .  dT8 aP6  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF4  .   .  aV8 
-E:  .  aP5  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP5 aF4  .  
+C: dT5  .   .  dA9  .  
+D: aP6  .   .  aV9 aV9 
+E: aA9  .   .   .   .  
 Next player: Attacker
 Turns played: 50
 
     0   1   2   3   4  
-A:  .   .  dT9 dF5  .  
-B:  .   .  dT8 aP5  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF4  .   .  aV8 
-E:  .  aP5  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP4 aF3  .  
+C: dT5  .   .  dA9  .  
+D: aP6  .   .  aV9 aV9 
+E: aA9  .   .   .   .  
 Next player: Defender
 Turns played: 51
 
     0   1   2   3   4  
-A:  .   .  dT9 dF4  .  
-B:  .   .  dT8 aP4  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF4  .   .  aV8 
-E:  .  aP5  .  aV9  .  
+A:  .   .   .   .   .  
+B: dT4  .  dP4 aF3  .  
+C: dT2  .   .  dA9  .  
+D: aP5  .   .  aV9 aV9 
+E: aA9  .   .   .   .  
 Next player: Attacker
 Turns played: 52
 
     0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT8 aP3  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF4  .   .  aV8 
-E:  .  aP5  .  aV9  .  
-Next player: Defender
-Turns played: 53
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT8 aP3  .  
-C: dA9 dP8 aF5 aA9  .  
-D:  .  dF4  .  aV9 aV8 
-E:  .  aP5  .   .   .  
-Next player: Attacker
-Turns played: 54
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT7 aP3  .  
-C: dA9 dP8 aF4 aA9  .  
-D:  .  dF4  .  aV9 aV8 
-E:  .  aP5  .   .   .  
-Next player: Defender
-Turns played: 55
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT7 aP3  .  
-C: dA9 dP8 aF4 aA9 aV8 
-D:  .  dF4  .  aV9  .  
-E:  .  aP5  .   .   .  
-Next player: Attacker
-Turns played: 56
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT4 aP2  .  
-C: dA9 dP8 aF4 aA9 aV8 
-D:  .  dF4  .  aV9  .  
-E:  .  aP5  .   .   .  
-Next player: Defender
-Turns played: 57
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT4 aP2  .  
-C: dA9 dP8 aF4 aA9 aV8 
-D:  .  dF4  .   .   .  
-E:  .  aP5  .  aV9  .  
-Next player: Attacker
-Turns played: 58
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT4 aP2  .  
-C:  .  dP8 aF4 aA9 aV8 
-D: dA9 dF4  .   .   .  
-E:  .  aP5  .  aV9  .  
-Next player: Defender
-Turns played: 59
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .   .  dT4 aP2  .  
-C:  .  dP8 aF4 aA9 aV8 
-D: dA9 dF3  .   .   .  
-E:  .  aP4  .  aV9  .  
-Next player: Attacker
-Turns played: 60
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .  dT4  .  aP2  .  
-C:  .  dP8 aF4 aA9 aV8 
-D: dA9 dF3  .   .   .  
-E:  .  aP4  .  aV9  .  
-Next player: Defender
-Turns played: 61
-
-    0   1   2   3   4  
-A:  .   .  dT9 dF3  .  
-B:  .  dT4  .  aP2  .  
-C:  .  dP8 aF4 aA9  .  
-D: dA9 dF3  .   .  aV8 
-E:  .  aP4  .  aV9  .  
-Next player: Attacker
-Turns played: 62
-
-    0   1   2   3   4  
-A:  .   .   .  dF3  .  
-B:  .  dT4 dT9 aP2  .  
-C:  .  dP8 aF4 aA9  .  
-D: dA9 dF3  .   .  aV8 
-E:  .  aP4  .  aV9  .  
-Next player: Defender
-Turns played: 63
-
-    0   1   2   3   4  
-A:  .   .   .  dF2  .  
-B:  .  dT4 dT9 aP1  .  
-C:  .  dP8 aF4 aA9  .  
-D: dA9 dF3  .   .  aV8 
-E:  .  aP4  .  aV9  .  
-Next player: Attacker
-Turns played: 64
-
-    0   1   2   3   4  
-A:  .   .   .  dF2  .  
-B:  .  dT4 dT9 aP1  .  
-C:  .  dP7 aF3 aA9  .  
-D: dA9 dF3  .   .  aV8 
-E:  .  aP4  .  aV9  .  
-Next player: Defender
-Turns played: 65
-
-    0   1   2   3   4  
-A:  .   .   .  dF2  .  
-B:  .  dT4 dT9 aP1  .  
-C:  .  dP7 aF3 aA9  .  
-D: dA9 dF3  .  aV8  .  
-E:  .  aP4  .  aV9  .  
-Next player: Attacker
-Turns played: 66
-
-    0   1   2   3   4  
-A:  .   .   .  dF2  .  
-B:  .  dT4 dT9 aP1  .  
-C:  .  dP7 aF3 aA9  .  
-D:  .  dF3  .  aV8  .  
-E: dA9 aP4  .  aV9  .  
-Next player: Defender
-Turns played: 67
-
-    0   1   2   3   4  
 A:  .   .   .   .   .  
-B:  .  dT4 dT7  .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF3  .  aV8  .  
-E: dA9 aP4  .  aV9  .  
-Next player: Attacker
-Turns played: 68
-
-    0   1   2   3   4  
-A:  .   .  dT7  .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF3  .  aV8  .  
-E: dA9 aP4  .  aV9  .  
-Next player: Defender
-Turns played: 69
-
-    0   1   2   3   4  
-A:  .   .  dT7  .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF2  .  aV8  .  
-E: dA9 aP3  .  aV9  .  
-Next player: Attacker
-Turns played: 70
-
-    0   1   2   3   4  
-A:  .  dT7  .   .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF2  .  aV8  .  
-E: dA9 aP3  .  aV9  .  
-Next player: Defender
-Turns played: 71
-
-    0   1   2   3   4  
-A:  .  dT7  .   .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF2  .  aV8  .  
-E: dA9 aP3 aV9  .   .  
-Next player: Attacker
-Turns played: 72
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF2  .  aV8  .  
-E: dA9 aP3 aV9  .   .  
-Next player: Defender
-Turns played: 73
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF2 aV9 aV8  .  
-E: dA9 aP3  .   .   .  
-Next player: Attacker
-Turns played: 74
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .  dT4  .   .   .  
-C:  .  dP7 aF1 aA7  .  
-D:  .  dF2 aV9 aV8  .  
-E: dA6  .   .   .   .  
-Next player: Defender
-Turns played: 75
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .  dT2  .   .   .  
-C:  .  dP5  .  aA5  .  
-D:  .   .  aV7 aV6  .  
-E: dA6  .   .   .   .  
-Next player: Attacker
-Turns played: 76
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .  dT2  .   .   .  
-C:  .  dP8  .  aA5  .  
-D:  .   .  aV7 aV6  .  
-E: dA6  .   .   .   .  
-Next player: Defender
-Turns played: 77
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .  dT2  .   .   .  
-C:  .  dP8  .  aA5  .  
-D:  .   .  aV7 aV7  .  
-E: dA6  .   .   .   .  
-Next player: Attacker
-Turns played: 78
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .   .  dT2  .   .  
-C:  .  dP8  .  aA5  .  
-D:  .   .  aV7 aV7  .  
-E: dA6  .   .   .   .  
-Next player: Defender
-Turns played: 79
-
-    0   1   2   3   4  
-A: dT7  .   .   .   .  
-B:  .   .  dT2 aA5  .  
-C:  .  dP8  .   .   .  
-D:  .   .  aV7 aV7  .  
-E: dA6  .   .   .   .  
-Next player: Attacker
-Turns played: 80
-
-    0   1   2   3   4  
-A: dT7  .  dT2  .   .  
-B:  .   .   .  aA5  .  
-C:  .  dP8  .   .   .  
-D:  .   .  aV7 aV7  .  
-E: dA6  .   .   .   .  
-Next player: Defender
-Turns played: 81
-
-    0   1   2   3   4  
-A: dT7  .  dT2  .   .  
-B:  .   .   .  aA5  .  
-C:  .  dP8  .   .   .  
-D:  .  aV7  .  aV7  .  
-E: dA6  .   .   .   .  
-Next player: Attacker
-Turns played: 82
-
-    0   1   2   3   4  
-A: dT7  .   .  dT2  .  
-B:  .   .   .  aA5  .  
-C:  .  dP8  .   .   .  
-D:  .  aV7  .  aV7  .  
-E: dA6  .   .   .   .  
-Next player: Defender
-Turns played: 83
-
-    0   1   2   3   4  
-A: dT7  .   .  dT2  .  
-B:  .   .   .  aA5  .  
-C:  .  dP8  .   .   .  
-D:  .   .   .  aV7  .  
-E: dA6 aV7  .   .   .  
-Next player: Attacker
-Turns played: 84
-
-    0   1   2   3   4  
-A: dT7  .  dT2  .   .  
-B:  .   .   .  aA5  .  
-C:  .  dP8  .   .   .  
-D:  .   .   .  aV7  .  
-E: dA6 aV7  .   .   .  
-Next player: Defender
-Turns played: 85
-
-    0   1   2   3   4  
-A: dT7  .  dT2 aA5  .  
-B:  .   .   .   .   .  
-C:  .  dP8  .   .   .  
-D:  .   .   .  aV7  .  
-E: dA6 aV7  .   .   .  
-Next player: Attacker
-Turns played: 86
-
-    0   1   2   3   4  
-A: dT7  .  dT2 aA5  .  
-B:  .   .   .   .   .  
-C:  .  dP8  .   .   .  
-D:  .   .   .  aV7  .  
-E:  .  aV5  .   .   .  
-Attacker wins in 86 turn(s)!
+B: dT4  .  dP2 aF1  .  
+C: dT2  .   .   .   .  
+D: aP5  .   .  aV7 aV7 
+E: aA9  .   .   .   .  
+Attacker wins in 52 turn(s)!

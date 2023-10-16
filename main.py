@@ -642,11 +642,6 @@ class Game:
         return heuristic_score
 
     def minimax(self, maximize: bool, depth: int) -> Tuple[int, CoordPair | None, float]:
-        # start_time = datetime.now()
-
-        # self.stats.total_seconds = (
-        #     datetime().now() - start_time).total_seconds()
-
         best_move = None
         # If we are at the end of the game or at the max depth, return the heuristic score
         if depth == 0 or self.is_finished():
@@ -656,29 +651,15 @@ class Game:
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
             for move in self.move_candidates():
-
-                # start_time = datetime.now()
-
-
-
                 # check if we have enough time
-                # print((datetime.now() - start_time).total_seconds())
-                # self.stats.total_seconds += (
-                #     datetime.now() - start_time
-                # ).total_seconds()
-
-                # if self.stats.total_seconds > min(
-                #     self.options.max_time - 1, self.options.max_time * 0.70
-                # ):
-                #     return (max_score, best_move, 0)
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > min(
+                if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
+                    # print("~~~TIMEOUT+++")
                     return (max_score, best_move, 0)
 
                 self.stats.evaluations_per_depth[depth] += 1
-                # print(f"MaxMove: {move} at depth {depth}")
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -698,21 +679,14 @@ class Game:
             min_score = MAX_HEURISTIC_SCORE
             for move in self.move_candidates():
                 # check if we have enough time
-                # print((datetime.now() - start_time).total_seconds())
-                # self.stats.total_seconds += (
-                #     datetime.now() - start_time
-                # ).total_seconds()
-                # if self.stats.total_seconds > min(
-                #     self.options.max_time - 1, self.options.max_time * 0.70
-                # ):
-                #     return (min_score, best_move, 0)
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > min(
+                if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
+                    # print("~~~TIMEOUT---")
                     return (min_score, best_move, 0)
+                
                 self.stats.evaluations_per_depth[depth] += 1
-                # print(f"MiniMove: {move} at depth {depth}")
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -743,11 +717,11 @@ class Game:
             for move in possible_moves:
                 # check if we have enough time
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > min(
+                if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
+                    # print("@@@TIMEOUT+++")
                     return (max_score, best_move, 0)
-
 
                 self.stats.evaluations_per_depth[depth] += 1
 
@@ -776,14 +750,13 @@ class Game:
             # for move in self.move_candidates():
             for move in possible_moves:
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > min(
+                if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
+                    # print("@@@TIMEOUT---")
                     return (min_score, best_move, 0)
+                
                 self.stats.evaluations_per_depth[depth] += 1
-
-                self.stats.evaluations_per_depth[depth] += 1
-                # print(f"MiniMove: {move} at depth {depth}")
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -825,7 +798,8 @@ class Game:
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ", end="")
         print()
         total_evals = sum(self.stats.evaluations_per_depth.values())
-        print(f"Cumulative evals: {total_evals}")
+        self.stats.cumulative_evals += total_evals
+        print(f"Cumulative evals: {self.stats.cumulative_evals}")
         if self.stats.total_seconds > 0:
             print(
                 f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
