@@ -242,6 +242,7 @@ class Options:
     max_turns: int | None = 100
     randomize_moves: bool = True
     broker: str | None = None
+    heuristic: int | None = 0
 
 
 ##############################################################################################################
@@ -651,7 +652,7 @@ class Game:
         
         # If we are at the end of the game or at the max depth, return the heuristic score
         if depth == 0 or self.is_finished():
-            return (self.heuristic_score(0), best_move, 0)
+            return (self.heuristic_score(self.options.heuristic), best_move, 0)
 
         # If we are maximizing
         if maximize:
@@ -713,7 +714,7 @@ class Game:
         best_move = None
 
         if depth == 0 or self.is_finished():
-            return (self.heuristic_score(0), best_move, 0)
+            return (self.heuristic_score(self.options.heuristic), best_move, 0)
 
         # Maximizing
         if maximize:
@@ -913,6 +914,7 @@ def main():
                         help="maximum number of turns")
     parser.add_argument(
         "--alpha_beta", help="type False this to turn off alpha_beta")
+    parser.add_argument("--heuristic", type=int, help="0, 1, 2")
     args = parser.parse_args()
 
     # parse the game type
@@ -939,6 +941,8 @@ def main():
         options.max_turns = args.max_turns
     if args.alpha_beta is not None:
         options.alpha_beta = False if args.alpha_beta.lower() == "false" else True
+    if args.heuristic is not None:
+        options.heuristic = args.heuristic
 
     # create a new game
     game = Game(options=options)
@@ -949,7 +953,7 @@ def main():
         "w",
     )
     file.write(
-        f"Value of the timeout: {options.max_time}\nMax number of turns: {options.max_turns}\nAlpha-Beta: {options.alpha_beta}\nPlay Mode: {options.game_type}\nHeuristic: N/A\n\n"
+        f"Value of the timeout: {options.max_time}\nMax number of turns: {options.max_turns}\nAlpha-Beta: {options.alpha_beta}\nPlay Mode: {options.game_type}\nHeuristic: e{options.heuristic}\n\n"
     )
 
     START_TIME = datetime.now()
