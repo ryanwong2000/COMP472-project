@@ -257,6 +257,7 @@ class Stats:
     start_time: datetime = datetime.now()
     heuristic_score: int = 0
     elapsed_seconds: float = 0.0
+    evaluations_per_depth_reset: dict[int, int] = field(default_factory=dict)
 
 ##############################################################################################################
 
@@ -277,6 +278,7 @@ class Game:
         """Automatically called after class init to set up the default board state."""
         for depth in range(1, self.options.max_depth + 1):
             self.stats.evaluations_per_depth[depth] = 0
+            
         dim = self.options.dim
         self.board = [[None for _ in range(dim)] for _ in range(dim)]
         md = dim - 1
@@ -645,6 +647,8 @@ class Game:
 
     def minimax(self, maximize: bool, depth: int) -> Tuple[int, CoordPair | None, float]:
         best_move = None
+        possible_moves = list(self.move_candidates())
+        
         # If we are at the end of the game or at the max depth, return the heuristic score
         if depth == 0 or self.is_finished():
             return (self.heuristic_score(0), best_move, 0)
@@ -652,7 +656,7 @@ class Game:
         # If we are maximizing
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
-            for move in self.move_candidates():
+            for move in possible_moves:
                 # check if we have enough time
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
                 if elapsed_time > max(
@@ -662,6 +666,7 @@ class Game:
                     return (max_score, best_move, 0)
 
                 self.stats.evaluations_per_depth[depth] += 1
+                self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -679,7 +684,7 @@ class Game:
         # If we are minimizing
         else:
             min_score = MAX_HEURISTIC_SCORE
-            for move in self.move_candidates():
+            for move in possible_moves:
                 # check if we have enough time
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
                 if elapsed_time > max(
@@ -689,6 +694,7 @@ class Game:
                     return (min_score, best_move, 0)
                 
                 self.stats.evaluations_per_depth[depth] += 1
+                self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -726,6 +732,7 @@ class Game:
                     return (max_score, best_move, 0)
 
                 self.stats.evaluations_per_depth[depth] += 1
+                self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -759,6 +766,7 @@ class Game:
                     return (min_score, best_move, 0)
                 
                 self.stats.evaluations_per_depth[depth] += 1
+                self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
                 # Create a new game state
                 child_game_state = self.clone()
@@ -779,6 +787,10 @@ class Game:
     def suggest_move(self) -> CoordPair | None:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         self.stats.total_seconds = 0
+        
+        for depth in range(1, self.options.max_depth + 1):
+            self.stats.evaluations_per_depth_reset[depth] = 0
+        
         self.stats.start_time = datetime.now()
 
         # (score, move, avg_depth) = self.random_move()
@@ -813,6 +825,13 @@ class Game:
         if self.stats.total_seconds > 0:
             print(f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
+        print(f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}")
+        
+        # Prints the number of nodes evaluated per depth
+        # for k in sorted(self.stats.evaluations_per_depth_reset.keys()):
+        #     print(f"{k}:{self.stats.evaluations_per_depth_reset[k]} ", end="")
+        print()
+        
         return move
 
     def post_move_to_broker(self, move: CoordPair):
@@ -977,6 +996,7 @@ def main():
             for k in sorted(game.stats.evaluations_per_depth.keys()):
                 file.write(f"{k}:{game.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ")
             file.write("\n")
+            file.write(f"Average branching factor: {sum(game.stats.evaluations_per_depth_reset.values())/game.options.max_depth:0.1f} \n")
             if game.stats.total_seconds > 0:
                 file.write(f"Eval perf.: {total_evals/game.stats.total_seconds/1000:0.1f}k/s \n")
             file.write(f"Elapsed time: {game.stats.elapsed_seconds:0.1f}s \n")
