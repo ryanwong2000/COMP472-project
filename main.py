@@ -260,6 +260,7 @@ class Stats:
     elapsed_seconds: float = 0.0
     evaluations_per_depth_reset: dict[int, int] = field(default_factory=dict)
 
+
 ##############################################################################################################
 
 
@@ -279,31 +280,23 @@ class Game:
         """Automatically called after class init to set up the default board state."""
         for depth in range(0, self.options.max_depth + 1):
             self.stats.evaluations_per_depth[depth] = 0
-            
+
         dim = self.options.dim
         self.board = [[None for _ in range(dim)] for _ in range(dim)]
         md = dim - 1
         self.set(Coord(0, 0), Unit(player=Player.Defender, type=UnitType.AI))
         self.set(Coord(1, 0), Unit(player=Player.Defender, type=UnitType.Tech))
         self.set(Coord(0, 1), Unit(player=Player.Defender, type=UnitType.Tech))
-        self.set(Coord(2, 0), Unit(
-            player=Player.Defender, type=UnitType.Firewall))
-        self.set(Coord(0, 2), Unit(
-            player=Player.Defender, type=UnitType.Firewall))
-        self.set(Coord(1, 1), Unit(
-            player=Player.Defender, type=UnitType.Program))
+        self.set(Coord(2, 0), Unit(player=Player.Defender, type=UnitType.Firewall))
+        self.set(Coord(0, 2), Unit(player=Player.Defender, type=UnitType.Firewall))
+        self.set(Coord(1, 1), Unit(player=Player.Defender, type=UnitType.Program))
         self.set(Coord(md, md), Unit(player=Player.Attacker, type=UnitType.AI))
-        self.set(Coord(md - 1, md),
-                 Unit(player=Player.Attacker, type=UnitType.Virus))
-        self.set(Coord(md, md - 1),
-                 Unit(player=Player.Attacker, type=UnitType.Virus))
-        self.set(Coord(md - 2, md),
-                 Unit(player=Player.Attacker, type=UnitType.Program))
-        self.set(Coord(md, md - 2),
-                 Unit(player=Player.Attacker, type=UnitType.Program))
+        self.set(Coord(md - 1, md), Unit(player=Player.Attacker, type=UnitType.Virus))
+        self.set(Coord(md, md - 1), Unit(player=Player.Attacker, type=UnitType.Virus))
+        self.set(Coord(md - 2, md), Unit(player=Player.Attacker, type=UnitType.Program))
+        self.set(Coord(md, md - 2), Unit(player=Player.Attacker, type=UnitType.Program))
         self.set(
-            Coord(md - 1, md - 1), Unit(player=Player.Attacker,
-                                        type=UnitType.Firewall)
+            Coord(md - 1, md - 1), Unit(player=Player.Attacker, type=UnitType.Firewall)
         )
 
     def clone(self) -> Game:
@@ -601,146 +594,141 @@ class Game:
                 unit_counts[unit.type] += 1
             return unit_counts
 
-        attacker_units = self.player_units(Player.Attacker)
-        defender_units = self.player_units(Player.Defender)
+        def manhattan_distance(point1: Coord, point2: Coord):
+            if not point1 or not point2:
+                return 0
+            return abs(point1.row - point2.row) + abs(point1.col - point2.col)
 
-        attacker_unit_counts = count_units(attacker_units)
-        defender_unit_counts = count_units(defender_units)
+        def get_health_score(list_tuples: list[Tuple[Coord, Unit]]):
+            score = 0
+            for _, unit in list_tuples:
+                match unit.type:
+                    case UnitType.AI:
+                        score += 1200 * unit.health
+                    case UnitType.Tech:
+                        score += 700 * unit.health
+                    case UnitType.Virus:
+                        score += (
+                            700
+                            * unit.health
+                            * (self.turns_played / self.options.max_turns)
+                        )
+                    case UnitType.Firewall:
+                        score += 100 * unit.health
+                    case UnitType.Program:
+                        score += (
+                            200
+                            * unit.health
+                            * (self.turns_played / self.options.max_turns)
+                        )
+            return score
 
-        ai, tech, virus, program, firewall = (
-            attacker_unit_counts[UnitType.AI],
-            attacker_unit_counts[UnitType.Tech],
-            attacker_unit_counts[UnitType.Virus],
-            attacker_unit_counts[UnitType.Program],
-            attacker_unit_counts[UnitType.Firewall],
-        )
+        def h0():
+            attacker_units = self.player_units(Player.Attacker)
+            defender_units = self.player_units(Player.Defender)
 
-        ai_other, tech_other, virus_other, program_other, firewall_other = (
-            defender_unit_counts[UnitType.AI],
-            defender_unit_counts[UnitType.Tech],
-            defender_unit_counts[UnitType.Virus],
-            defender_unit_counts[UnitType.Program],
-            defender_unit_counts[UnitType.Firewall],
-        )
+            attacker_unit_counts = count_units(attacker_units)
+            defender_unit_counts = count_units(defender_units)
+
+            ai, tech, virus, program, firewall = (
+                attacker_unit_counts[UnitType.AI],
+                attacker_unit_counts[UnitType.Tech],
+                attacker_unit_counts[UnitType.Virus],
+                attacker_unit_counts[UnitType.Program],
+                attacker_unit_counts[UnitType.Firewall],
+            )
+
+            ai_other, tech_other, virus_other, program_other, firewall_other = (
+                defender_unit_counts[UnitType.AI],
+                defender_unit_counts[UnitType.Tech],
+                defender_unit_counts[UnitType.Virus],
+                defender_unit_counts[UnitType.Program],
+                defender_unit_counts[UnitType.Firewall],
+            )
+
+            return (
+                3 * (virus + tech + firewall + program)
+                + 9999 * ai
+                - 3 * (virus_other + tech_other + firewall_other + program_other)
+                - 9999 * ai_other
+            )
+
+        def h1():
+            attacker_units = self.player_units(Player.Attacker)
+            defender_units = self.player_units(Player.Defender)
+
+            atk_score = get_health_score(attacker_units)
+            def_score = get_health_score(defender_units)
+
+            return atk_score - def_score
+
+        def h2():
+            attacker_units = self.player_units(Player.Attacker)
+            defender_units = self.player_units(Player.Defender)
+
+            def findAI(tuple_list: list[Tuple[Coord, Unit]]):
+                for coord, unit in tuple_list:
+                    if unit.type == UnitType.AI:
+                        return coord
+
+            ai_attacker_coord = findAI(attacker_units)
+            ai_defender_coord = findAI(defender_units)
+
+            atk_to_def_ai = 0
+            def_to_atk_ai = 0
+
+            for attacker_coord, _ in attacker_units:
+                atk_to_def_ai += manhattan_distance(attacker_coord, ai_defender_coord)
+
+            for defender_coord, _ in defender_units:
+                def_to_atk_ai += manhattan_distance(defender_coord, ai_attacker_coord)
+
+            return atk_to_def_ai - def_to_atk_ai
 
         match heuristic_number:
             case 0:
-                heuristic_score = (
-                    3 * (virus + tech + firewall + program)
-                    + 9999 * ai
-                    - 3 * (virus_other + tech_other +
-                           firewall_other + program_other)
-                    - 9999 * ai_other
-                )
+                return h0()
             case 1:
-                heuristic_score = (
-                    6 * (virus + tech)
-                    + 3 * (firewall + program)
-                    + 9999 * ai
-                    - 6 * (virus_other + tech_other)
-                    - 3 * (firewall_other + program_other)
-                    - 9999 * ai_other
-                )
+                return h1()
+            case 2:
+                return h2()
             case _:
-                raise ValueError("Invalid heuristic number")
-        # print(heuristic_score)
-        return heuristic_score
+                return h0()
 
-    # def minimax(self, maximize: bool, depth: int) -> Tuple[int, CoordPair | None, float]:
-    #     best_move = None
-    #     possible_moves = list(self.move_candidates())
-        
-    #     # If we are at the end of the game or at the max depth, return the heuristic score
-    #     if depth == 0 or self.is_finished():
-    #         return (self.heuristic_score(self.options.heuristic), best_move, 0)
-
-    #     # If we are maximizing
-    #     if maximize:
-    #         max_score = MIN_HEURISTIC_SCORE
-    #         for move in possible_moves:
-    #             # check if we have enough time
-    #             elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-    #             if elapsed_time > max(
-    #                 self.options.max_time - 1, self.options.max_time * 0.70
-    #             ):
-    #                 # print("~~~TIMEOUT+++")
-    #                 return (max_score, best_move, 0)
-
-    #             self.stats.evaluations_per_depth[depth] += 1
-    #             self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
-
-    #             # Create a new game state
-    #             child_game_state = self.clone()
-    #             child_game_state.perform_move(move)
-
-    #             # Call minimax recursively
-    #             child_game_state.next_turn()
-    #             score = child_game_state.minimax(False, depth - 1)[0]
-    #             # Update max_score
-    #             if score > max_score:
-    #                 max_score = score
-    #                 best_move = move
-    #         return (max_score, best_move, 0)
-
-    #     # If we are minimizing
-    #     else:
-    #         min_score = MAX_HEURISTIC_SCORE
-    #         for move in possible_moves:
-    #             # check if we have enough time
-    #             elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-    #             if elapsed_time > max(
-    #                 self.options.max_time - 1, self.options.max_time * 0.70
-    #             ):
-    #                 # print("~~~TIMEOUT---")
-    #                 return (min_score, best_move, 0)
-                
-    #             self.stats.evaluations_per_depth[depth] += 1
-    #             self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
-
-    #             # Create a new game state
-    #             child_game_state = self.clone()
-    #             child_game_state.perform_move(move)
-
-    #             # Call minimax recursively
-    #             child_game_state.next_turn()
-    #             score = child_game_state.minimax(True, depth - 1)[0]
-    #             # Update min_score
-    #             if score < min_score:
-    #                 min_score = score
-    #                 best_move = move
-    #         return (min_score, best_move, 0)
-    
-    def minimax(self, node: Game, maximize: bool, depth: int) -> Tuple[int | None, CoordPair | None]:
-                
-        # print(node.to_string())
-        possible_moves = list(node.move_candidates())
+    def minimax(
+        self, maximize: bool, depth: int
+    ) -> Tuple[int | None, CoordPair | None]:
+        # print(self.to_string())
+        possible_moves = list(self.move_candidates())
         self.stats.evaluations_per_depth[depth] += 1
-        
+
         # Check if we are at the end of the game or at the max depth
-        if depth == 0 or node.is_finished():
-            return node.heuristic_score(self.options.heuristic), None
-        
+        if depth == 0 or self.is_finished():
+            return (self.heuristic_score(self.options.heuristic), 0)
+
         # If maximizing
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
             best_move = None
             self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
-            # Check every move possible from the current node
+            # Check every move possible from the current self
             for move in possible_moves:
                 # Set the timer
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > max(self.options.max_time - 1, self.options.max_time * 0.70):
+                if elapsed_time > max(
+                    self.options.max_time - 1, self.options.max_time * 0.70
+                ):
                     return max_score, best_move
-                # Clone the current node and perform the move
-                child = node.clone()
+                # Clone the current self and perform the move
+                child = self.clone()
                 child.perform_move(move)
                 child.next_turn()
-                score, _ = self.minimax(child, False, depth - 1)
+                score, _ = child.minimax(False, depth - 1)
                 if score > max_score:
                     max_score = score
                     best_move = move
             return max_score, best_move
-        
+
         # If minimizing
         else:
             min_score = MAX_HEURISTIC_SCORE
@@ -748,19 +736,23 @@ class Game:
             self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
             for move in possible_moves:
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > max(self.options.max_time - 1, self.options.max_time * 0.70):
-                        return min_score, best_move
-                    # Clone the current node and perform the move
-                child = node.clone()
+                if elapsed_time > max(
+                    self.options.max_time - 1, self.options.max_time * 0.70
+                ):
+                    return min_score, best_move
+                # Clone the current self and perform the move
+                child = self.clone()
                 child.perform_move(move)
                 child.next_turn()
-                score, _ = self.minimax(child, True, depth - 1)
+                score, _ = child.minimax(True, depth - 1)
                 if score < min_score:
                     min_score = score
                     best_move = move
-            return min_score, best_move 
+            return min_score, best_move
 
-    def alpha_beta(self, maximize: bool, depth: int, alpha: int, beta: int) -> Tuple[int, CoordPair | None, float]:
+    def alpha_beta(
+        self, maximize: bool, depth: int, alpha: int, beta: int
+    ) -> Tuple[int, CoordPair | None, float]:
         best_move = None
         self.stats.evaluations_per_depth[depth] += 1
 
@@ -772,8 +764,7 @@ class Game:
             max_score = MIN_HEURISTIC_SCORE
             possible_moves = list(self.move_candidates())
             # random.shuffle(possible_moves)
-            # for move in self.move_candidates():
-            for move in possible_moves:
+            for move in self.move_candidates():
                 # check if we have enough time
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
                 if elapsed_time > max(
@@ -789,8 +780,7 @@ class Game:
                 child_game_state.perform_move(move)
                 child_game_state.next_turn()
 
-                score = child_game_state.alpha_beta(
-                    False, depth-1, alpha, beta)[0]
+                score = child_game_state.alpha_beta(False, depth - 1, alpha, beta)[0]
                 if score > max_score:
                     max_score = score
                     best_move = move
@@ -804,16 +794,15 @@ class Game:
         else:
             min_score = MAX_HEURISTIC_SCORE
             possible_moves = list(self.move_candidates())
-            random.shuffle(possible_moves)
-            # for move in self.move_candidates():
-            for move in possible_moves:
+            # random.shuffle(possible_moves)
+            for move in self.move_candidates():
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
                 if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
                     # print("@@@TIMEOUT---")
                     return (min_score, best_move, 0)
-                
+
                 self.stats.evaluations_per_depth[depth] += 1
                 self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
@@ -822,8 +811,7 @@ class Game:
                 child_game_state.perform_move(move)
                 child_game_state.next_turn()
 
-                score = child_game_state.alpha_beta(
-                    True, depth - 1, alpha, beta)[0]
+                score = child_game_state.alpha_beta(True, depth - 1, alpha, beta)[0]
                 if score < min_score:
                     min_score = score
                     best_move = move
@@ -836,50 +824,59 @@ class Game:
     def suggest_move(self) -> CoordPair | None:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
         self.stats.total_seconds = 0
-        
+
         for depth in range(1, self.options.max_depth + 1):
             self.stats.evaluations_per_depth_reset[depth] = 0
-        
-        self.stats.start_time = datetime.now()
 
-        # (score, move, avg_depth) = self.random_move()
+        self.stats.start_time = datetime.now()
 
         if self.options.alpha_beta:
             (score, move, avg_depth) = self.alpha_beta(
-                self.next_player is Player.Attacker, self.options.max_depth, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
+                self.next_player is Player.Attacker,
+                self.options.max_depth,
+                MIN_HEURISTIC_SCORE,
+                MAX_HEURISTIC_SCORE,
+            )
         else:
-            (score, move) = self.minimax(self, self.next_player is Player.Attacker, self.options.max_depth)
+            (score, move) = self.minimax(
+                self.next_player is Player.Attacker, self.options.max_depth
+            )
 
         elapsed_seconds = (datetime.now() - self.stats.start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
-        
+
         total_evals = sum(self.stats.evaluations_per_depth.values())
-        
+
         self.stats.heuristic_score = score
         self.stats.elapsed_seconds = elapsed_seconds
-        
+
         print(move)
         print(f"Heuristic score: {score}")
         print(f"Cumulative evals: {total_evals}")
-        
+
         print(f"Evals per depth: ", end="")
         for k in sorted(self.stats.evaluations_per_depth.keys()):
             print(f"{k}:{self.stats.evaluations_per_depth[k]} ", end="")
         print()
         print(f"Cumulative % evals by depth: ", end="")
         for k in sorted(self.stats.evaluations_per_depth.keys()):
-            print(f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ", end="")
+            print(
+                f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ",
+                end="",
+            )
         print()
         if self.stats.total_seconds > 0:
             print(f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
-        print(f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}")
-        
+        print(
+            f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}"
+        )
+
         # Prints the number of nodes evaluated per depth
         for k in sorted(self.stats.evaluations_per_depth_reset.keys()):
             print(f"{k}:{self.stats.evaluations_per_depth_reset[k]} ", end="")
         print()
-        
+
         return move
 
     def post_move_to_broker(self, move: CoordPair):
@@ -957,10 +954,8 @@ def main():
         help="game type: auto|attacker|defender|manual",
     )
     parser.add_argument("--broker", type=str, help="play via a game broker")
-    parser.add_argument("--max_turns", type=int,
-                        help="maximum number of turns")
-    parser.add_argument(
-        "--alpha_beta", help="type False this to turn off alpha_beta")
+    parser.add_argument("--max_turns", type=int, help="maximum number of turns")
+    parser.add_argument("--alpha_beta", help="type False this to turn off alpha_beta")
     parser.add_argument("--heuristic", type=int, help="0, 1, 2")
     args = parser.parse_args()
 
@@ -1022,7 +1017,10 @@ def main():
             move = game.human_turn()
             print(f"Move from {move.src} to {move.dst}")
             file.write(f"Move from {move.src} to {move.dst}\n")
-        elif (game.options.game_type == GameType.AttackerVsComp and game.next_player == Player.Attacker):
+        elif (
+            game.options.game_type == GameType.AttackerVsComp
+            and game.next_player == Player.Attacker
+        ):
             game.human_turn()
         elif (
             game.options.game_type == GameType.CompVsDefender
@@ -1032,26 +1030,32 @@ def main():
         else:
             player = game.next_player
             move = game.computer_turn()
-            
+
             total_evals = sum(game.stats.evaluations_per_depth.values())
             file.write(move.to_string())
             file.write("\n")
             file.write(f"Heuristic score: {game.stats.heuristic_score} \n")
             file.write(f"Cumulative evals: {total_evals} \n")
-            
+
             file.write("Evals per depth: ")
             for k in sorted(game.stats.evaluations_per_depth.keys()):
                 file.write(f"{k}:{game.stats.evaluations_per_depth[k]} ")
             file.write("\n")
             file.write(f"Cumulative % evals by depth: ")
             for k in sorted(game.stats.evaluations_per_depth.keys()):
-                file.write(f"{k}:{game.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ")
+                file.write(
+                    f"{k}:{game.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% "
+                )
             file.write("\n")
-            file.write(f"Average branching factor: {sum(game.stats.evaluations_per_depth_reset.values())/game.options.max_depth:0.1f} \n")
+            file.write(
+                f"Average branching factor: {sum(game.stats.evaluations_per_depth_reset.values())/game.options.max_depth:0.1f} \n"
+            )
             if game.stats.total_seconds > 0:
-                file.write(f"Eval perf.: {total_evals/game.stats.total_seconds/1000:0.1f}k/s \n")
+                file.write(
+                    f"Eval perf.: {total_evals/game.stats.total_seconds/1000:0.1f}k/s \n"
+                )
             file.write(f"Elapsed time: {game.stats.elapsed_seconds:0.1f}s \n")
-            
+
             if move is not None:
                 game.post_move_to_broker(move)
             else:
