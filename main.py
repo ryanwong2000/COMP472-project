@@ -277,7 +277,7 @@ class Game:
 
     def __post_init__(self):
         """Automatically called after class init to set up the default board state."""
-        for depth in range(1, self.options.max_depth + 1):
+        for depth in range(0, self.options.max_depth + 1):
             self.stats.evaluations_per_depth[depth] = 0
             
         dim = self.options.dim
@@ -643,75 +643,126 @@ class Game:
                 )
             case _:
                 raise ValueError("Invalid heuristic number")
-
+        # print(heuristic_score)
         return heuristic_score
 
-    def minimax(self, maximize: bool, depth: int) -> Tuple[int, CoordPair | None, float]:
-        best_move = None
-        possible_moves = list(self.move_candidates())
+    # def minimax(self, maximize: bool, depth: int) -> Tuple[int, CoordPair | None, float]:
+    #     best_move = None
+    #     possible_moves = list(self.move_candidates())
         
-        # If we are at the end of the game or at the max depth, return the heuristic score
-        if depth == 0 or self.is_finished():
-            return (self.heuristic_score(self.options.heuristic), best_move, 0)
+    #     # If we are at the end of the game or at the max depth, return the heuristic score
+    #     if depth == 0 or self.is_finished():
+    #         return (self.heuristic_score(self.options.heuristic), best_move, 0)
 
-        # If we are maximizing
+    #     # If we are maximizing
+    #     if maximize:
+    #         max_score = MIN_HEURISTIC_SCORE
+    #         for move in possible_moves:
+    #             # check if we have enough time
+    #             elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
+    #             if elapsed_time > max(
+    #                 self.options.max_time - 1, self.options.max_time * 0.70
+    #             ):
+    #                 # print("~~~TIMEOUT+++")
+    #                 return (max_score, best_move, 0)
+
+    #             self.stats.evaluations_per_depth[depth] += 1
+    #             self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
+
+    #             # Create a new game state
+    #             child_game_state = self.clone()
+    #             child_game_state.perform_move(move)
+
+    #             # Call minimax recursively
+    #             child_game_state.next_turn()
+    #             score = child_game_state.minimax(False, depth - 1)[0]
+    #             # Update max_score
+    #             if score > max_score:
+    #                 max_score = score
+    #                 best_move = move
+    #         return (max_score, best_move, 0)
+
+    #     # If we are minimizing
+    #     else:
+    #         min_score = MAX_HEURISTIC_SCORE
+    #         for move in possible_moves:
+    #             # check if we have enough time
+    #             elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
+    #             if elapsed_time > max(
+    #                 self.options.max_time - 1, self.options.max_time * 0.70
+    #             ):
+    #                 # print("~~~TIMEOUT---")
+    #                 return (min_score, best_move, 0)
+                
+    #             self.stats.evaluations_per_depth[depth] += 1
+    #             self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
+
+    #             # Create a new game state
+    #             child_game_state = self.clone()
+    #             child_game_state.perform_move(move)
+
+    #             # Call minimax recursively
+    #             child_game_state.next_turn()
+    #             score = child_game_state.minimax(True, depth - 1)[0]
+    #             # Update min_score
+    #             if score < min_score:
+    #                 min_score = score
+    #                 best_move = move
+    #         return (min_score, best_move, 0)
+    
+    def minimax(self, node: Game, maximize: bool, depth: int) -> Tuple[int | None, CoordPair | None]:
+                
+        # print(node.to_string())
+        possible_moves = list(node.move_candidates())
+        self.stats.evaluations_per_depth[depth] += 1
+        
+        # Check if we are at the end of the game or at the max depth
+        if depth == 0 or node.is_finished():
+            return node.heuristic_score(self.options.heuristic), None
+        
+        # If maximizing
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
+            best_move = None
+            self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
+            # Check every move possible from the current node
             for move in possible_moves:
-                # check if we have enough time
+                # Set the timer
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > max(
-                    self.options.max_time - 1, self.options.max_time * 0.70
-                ):
-                    # print("~~~TIMEOUT+++")
-                    return (max_score, best_move, 0)
-
-                self.stats.evaluations_per_depth[depth] += 1
-                self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
-
-                # Create a new game state
-                child_game_state = self.clone()
-                child_game_state.perform_move(move)
-
-                # Call minimax recursively
-                child_game_state.next_turn()
-                score = child_game_state.minimax(False, depth - 1)[0]
-                # Update max_score
+                if elapsed_time > max(self.options.max_time - 1, self.options.max_time * 0.70):
+                    return max_score, best_move
+                # Clone the current node and perform the move
+                child = node.clone()
+                child.perform_move(move)
+                child.next_turn()
+                score, _ = self.minimax(child, False, depth - 1)
                 if score > max_score:
                     max_score = score
                     best_move = move
-            return (max_score, best_move, 0)
-
-        # If we are minimizing
+            return max_score, best_move
+        
+        # If minimizing
         else:
             min_score = MAX_HEURISTIC_SCORE
+            best_move = None
+            self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
             for move in possible_moves:
-                # check if we have enough time
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
-                if elapsed_time > max(
-                    self.options.max_time - 1, self.options.max_time * 0.70
-                ):
-                    # print("~~~TIMEOUT---")
-                    return (min_score, best_move, 0)
-                
-                self.stats.evaluations_per_depth[depth] += 1
-                self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
-
-                # Create a new game state
-                child_game_state = self.clone()
-                child_game_state.perform_move(move)
-
-                # Call minimax recursively
-                child_game_state.next_turn()
-                score = child_game_state.minimax(True, depth - 1)[0]
-                # Update min_score
+                if elapsed_time > max(self.options.max_time - 1, self.options.max_time * 0.70):
+                        return min_score, best_move
+                    # Clone the current node and perform the move
+                child = node.clone()
+                child.perform_move(move)
+                child.next_turn()
+                score, _ = self.minimax(child, True, depth - 1)
                 if score < min_score:
                     min_score = score
                     best_move = move
-            return (min_score, best_move, 0)
+            return min_score, best_move 
 
     def alpha_beta(self, maximize: bool, depth: int, alpha: int, beta: int) -> Tuple[int, CoordPair | None, float]:
         best_move = None
+        self.stats.evaluations_per_depth[depth] += 1
 
         if depth == 0 or self.is_finished():
             return (self.heuristic_score(self.options.heuristic), best_move, 0)
@@ -719,9 +770,8 @@ class Game:
         # Maximizing
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
-
             possible_moves = list(self.move_candidates())
-            random.shuffle(possible_moves)
+            # random.shuffle(possible_moves)
             # for move in self.move_candidates():
             for move in possible_moves:
                 # check if we have enough time
@@ -732,7 +782,6 @@ class Game:
                     # print("@@@TIMEOUT+++")
                     return (max_score, best_move, 0)
 
-                self.stats.evaluations_per_depth[depth] += 1
                 self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
                 # Create a new game state
@@ -754,7 +803,6 @@ class Game:
         # Minimizing
         else:
             min_score = MAX_HEURISTIC_SCORE
-
             possible_moves = list(self.move_candidates())
             random.shuffle(possible_moves)
             # for move in self.move_candidates():
@@ -800,8 +848,7 @@ class Game:
             (score, move, avg_depth) = self.alpha_beta(
                 self.next_player is Player.Attacker, self.options.max_depth, MIN_HEURISTIC_SCORE, MAX_HEURISTIC_SCORE)
         else:
-            (score, move, avg_depth) = self.minimax(
-                self.next_player is Player.Attacker, self.options.max_depth)
+            (score, move) = self.minimax(self, self.next_player is Player.Attacker, self.options.max_depth)
 
         elapsed_seconds = (datetime.now() - self.stats.start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
@@ -829,8 +876,8 @@ class Game:
         print(f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}")
         
         # Prints the number of nodes evaluated per depth
-        # for k in sorted(self.stats.evaluations_per_depth_reset.keys()):
-        #     print(f"{k}:{self.stats.evaluations_per_depth_reset[k]} ", end="")
+        for k in sorted(self.stats.evaluations_per_depth_reset.keys()):
+            print(f"{k}:{self.stats.evaluations_per_depth_reset[k]} ", end="")
         print()
         
         return move
