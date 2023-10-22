@@ -260,7 +260,7 @@ class Stats:
     heuristic_score: int = 0
     elapsed_seconds: float = 0.0
     evaluations_per_depth_reset: dict[int, int] = field(default_factory=dict)
-    branching_factor: list = []
+    branching_factor: int = 0
 
 
 ##############################################################################################################
@@ -698,15 +698,15 @@ class Game:
             case _:
                 return e0()
 
-    def minimax(
-        self, maximize: bool, depth: int
-    ) -> Tuple[int | None, CoordPair | None]:
+    def minimax(self, maximize: bool, depth: int, branching_factor: dict) -> Tuple[int | None, CoordPair | None]:
         # print(self.to_string())
         possible_moves = list(self.move_candidates())
         if self.options.random:
             random.shuffle(possible_moves)
 
         self.stats.evaluations_per_depth[depth] += 1
+        
+        children = 0
 
         # Check if we are at the end of the game or at the max depth
         if depth == 0 or self.is_finished():
@@ -724,15 +724,20 @@ class Game:
                 if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
+                    branching_factor[depth] += children
                     return max_score, best_move
+                
+                children += 1
+                
                 # Clone the current self and perform the move
                 child = self.clone()
                 child.perform_move(move)
                 child.next_turn()
-                score, _ = child.minimax(False, depth - 1)
+                score, _ = child.minimax(False, depth - 1, branching_factor)
                 if score > max_score:
                     max_score = score
                     best_move = move
+            branching_factor[depth] += children
             return max_score, best_move
 
         # If minimizing
@@ -745,19 +750,24 @@ class Game:
                 if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
+                    branching_factor[depth] += children
                     return min_score, best_move
+                
+                children += 1
+                
                 # Clone the current self and perform the move
                 child = self.clone()
                 child.perform_move(move)
                 child.next_turn()
-                score, _ = child.minimax(True, depth - 1)
+                score, _ = child.minimax(True, depth - 1, branching_factor)
                 if score < min_score:
                     min_score = score
                     best_move = move
+            branching_factor[depth] += children
             return min_score, best_move
 
     def alpha_beta(
-        self, maximize: bool, depth: int, alpha: int, beta: int, branching_factor: list
+        self, maximize: bool, depth: int, alpha: int, beta: int, branching_factor: dict
     ) -> Tuple[int, CoordPair | None]:
         best_move = None
         self.stats.evaluations_per_depth[depth] += 1
@@ -782,6 +792,7 @@ class Game:
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
                     # print("@@@TIMEOUT+++")
+                    branching_factor[depth] += children
                     return (max_score, best_move, 0)
 
                 self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
@@ -800,7 +811,7 @@ class Game:
                 alpha = max(alpha, max_score)
                 if beta <= alpha:
                     break  # prune the remaining branches
-            branching_factor.append(children)
+            branching_factor[depth] += children
             return (max_score, best_move, 0)
 
         # Minimizing
@@ -813,6 +824,7 @@ class Game:
                     self.options.max_time - 1, self.options.max_time * 0.70
                 ):
                     # print("@@@TIMEOUT---")
+                    branching_factor[depth] += children
                     return (min_score, best_move, 0)
 
                 self.stats.evaluations_per_depth[depth] += 1
@@ -832,7 +844,7 @@ class Game:
                 beta = min(beta, min_score)
                 if beta <= alpha:
                     break
-            branching_factor.append(children)
+            branching_factor[depth] += children
             return (min_score, best_move, 0)
 
     def suggest_move(self) -> CoordPair | None:
@@ -840,7 +852,11 @@ class Game:
         self.stats.start_time = datetime.now()
         self.stats.total_seconds = 0
 
-        branching_factor = []
+        branching_factor_dict = {}
+        average_branching_factor_list = []
+
+        for depth in range(1, self.options.max_depth + 1):
+            branching_factor_dict[depth] = 0
 
         for depth in range(1, self.options.max_depth + 1):
             self.stats.evaluations_per_depth_reset[depth] = 0
@@ -852,11 +868,11 @@ class Game:
                 self.options.max_depth,
                 MIN_HEURISTIC_SCORE,
                 MAX_HEURISTIC_SCORE,
-                branching_factor,
+                branching_factor_dict,
             )
         else:
             (score, move) = self.minimax(
-                self.next_player is Player.Attacker, self.options.max_depth, branching_factor)
+                self.next_player is Player.Attacker, self.options.max_depth, branching_factor_dict)
 
         elapsed_seconds = (datetime.now() - self.stats.start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
@@ -872,27 +888,29 @@ class Game:
 
         print(f"Evals per depth: ", end="")
         for k in sorted(self.stats.evaluations_per_depth.keys()):
-            print(f"{k}:{self.stats.evaluations_per_depth[k]} ", end="")
+            print(f"{k}: {self.stats.evaluations_per_depth[k]} ", end="")
         print()
         print(f"Cumulative % evals by depth: ", end="")
         for k in sorted(self.stats.evaluations_per_depth.keys()):
             print(
-                f"{k}:{self.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ",
+                f"{k}: {self.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% ",
                 end="",
             )
         print()
         if self.stats.total_seconds > 0:
             print(f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
-        # print(
-        #     f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}"
-        # )
 
-        print(branching_factor)
-
-        # Prints the number of nodes evaluated per depth
-        for k in sorted(self.stats.evaluations_per_depth_reset.keys()):
-            print(f"{k}:{self.stats.evaluations_per_depth_reset[k]} ", end="")
+        for i in range(1, self.options.max_depth):
+            if branching_factor_dict[i+1] == 0:
+                average_branching_factor_list.append(branching_factor_dict[i])
+            else:    
+                average_branching_factor_list.append(branching_factor_dict[i] / branching_factor_dict[i+1])
+        average_branching_factor_list.append(branching_factor_dict[self.options.max_depth])
+        
+        self.stats.branching_factor = sum([x for x in average_branching_factor_list if x != 0]) / len([x for x in average_branching_factor_list if x != 0])
+        
+        print(f"Average branching factor: {self.stats.branching_factor:0.1f}")
         print()
 
         return move
@@ -1060,16 +1078,16 @@ def main():
 
             file.write("Evals per depth: ")
             for k in sorted(game.stats.evaluations_per_depth.keys()):
-                file.write(f"{k}:{game.stats.evaluations_per_depth[k]} ")
+                file.write(f"{k}: {game.stats.evaluations_per_depth[k]} ")
             file.write("\n")
             file.write(f"Cumulative % evals by depth: ")
             for k in sorted(game.stats.evaluations_per_depth.keys()):
                 file.write(
-                    f"{k}:{game.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% "
+                    f"{k}: {game.stats.evaluations_per_depth[k]/total_evals*100:0.2f}% "
                 )
             file.write("\n")
             file.write(
-                f"Average branching factor: {sum(game.stats.evaluations_per_depth_reset.values())/game.options.max_depth:0.1f} \n"
+                f"Average branching factor: {game.stats.branching_factor:0.1f} \n"
             )
             if game.stats.total_seconds > 0:
                 file.write(
