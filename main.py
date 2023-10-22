@@ -260,6 +260,7 @@ class Stats:
     heuristic_score: int = 0
     elapsed_seconds: float = 0.0
     evaluations_per_depth_reset: dict[int, int] = field(default_factory=dict)
+    branching_factor: list = []
 
 
 ##############################################################################################################
@@ -756,10 +757,11 @@ class Game:
             return min_score, best_move
 
     def alpha_beta(
-        self, maximize: bool, depth: int, alpha: int, beta: int
-    ) -> Tuple[int, CoordPair | None, float]:
+        self, maximize: bool, depth: int, alpha: int, beta: int, branching_factor: list
+    ) -> Tuple[int, CoordPair | None]:
         best_move = None
         self.stats.evaluations_per_depth[depth] += 1
+        children = 0
 
         if depth == 0 or self.is_finished():
             return (self.heuristic_score(self.options.heuristic), best_move, 0)
@@ -784,19 +786,21 @@ class Game:
 
                 self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
+                children += 1
+
                 # Create a new game state
                 child_game_state = self.clone()
                 child_game_state.perform_move(move)
                 child_game_state.next_turn()
 
-                score = child_game_state.alpha_beta(False, depth - 1, alpha, beta)[0]
+                score = child_game_state.alpha_beta(False, depth - 1, alpha, beta, branching_factor)[0]
                 if score > max_score:
                     max_score = score
                     best_move = move
                 alpha = max(alpha, max_score)
                 if beta <= alpha:
                     break  # prune the remaining branches
-
+            branching_factor.append(children)
             return (max_score, best_move, 0)
 
         # Minimizing
@@ -814,29 +818,33 @@ class Game:
                 self.stats.evaluations_per_depth[depth] += 1
                 self.stats.evaluations_per_depth_reset[depth] = len(possible_moves)
 
+                children += 1
+
                 # Create a new game state
                 child_game_state = self.clone()
                 child_game_state.perform_move(move)
                 child_game_state.next_turn()
 
-                score = child_game_state.alpha_beta(True, depth - 1, alpha, beta)[0]
+                score = child_game_state.alpha_beta(True, depth - 1, alpha, beta, branching_factor)[0]
                 if score < min_score:
                     min_score = score
                     best_move = move
                 beta = min(beta, min_score)
                 if beta <= alpha:
                     break
-
+            branching_factor.append(children)
             return (min_score, best_move, 0)
 
     def suggest_move(self) -> CoordPair | None:
         """Suggest the next move using minimax alpha beta. TODO: REPLACE RANDOM_MOVE WITH PROPER GAME LOGIC!!!"""
+        self.stats.start_time = datetime.now()
         self.stats.total_seconds = 0
+
+        branching_factor = []
 
         for depth in range(1, self.options.max_depth + 1):
             self.stats.evaluations_per_depth_reset[depth] = 0
 
-        self.stats.start_time = datetime.now()
 
         if self.options.alpha_beta:
             (score, move, avg_depth) = self.alpha_beta(
@@ -844,11 +852,11 @@ class Game:
                 self.options.max_depth,
                 MIN_HEURISTIC_SCORE,
                 MAX_HEURISTIC_SCORE,
+                branching_factor,
             )
         else:
             (score, move) = self.minimax(
-                self.next_player is Player.Attacker, self.options.max_depth
-            )
+                self.next_player is Player.Attacker, self.options.max_depth, branching_factor)
 
         elapsed_seconds = (datetime.now() - self.stats.start_time).total_seconds()
         self.stats.total_seconds += elapsed_seconds
@@ -876,9 +884,11 @@ class Game:
         if self.stats.total_seconds > 0:
             print(f"Eval perf.: {total_evals/self.stats.total_seconds/1000:0.1f}k/s")
         print(f"Elapsed time: {elapsed_seconds:0.1f}s")
-        print(
-            f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}"
-        )
+        # print(
+        #     f"Average branching factor: {sum(self.stats.evaluations_per_depth_reset.values())/self.options.max_depth:0.1f}"
+        # )
+
+        print(branching_factor)
 
         # Prints the number of nodes evaluated per depth
         for k in sorted(self.stats.evaluations_per_depth_reset.keys()):
