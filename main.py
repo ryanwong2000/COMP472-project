@@ -243,6 +243,7 @@ class Options:
     randomize_moves: bool = True
     broker: str | None = None
     heuristic: int | None = 0
+    random: bool = False
 
 
 ##############################################################################################################
@@ -596,7 +597,7 @@ class Game:
 
         def manhattan_distance(point1: Coord, point2: Coord):
             if not point1 or not point2:
-                return 0
+                return -99999
             return abs(point1.row - point2.row) + abs(point1.col - point2.col)
 
         def get_health_score(list_tuples: list[Tuple[Coord, Unit]]):
@@ -623,7 +624,7 @@ class Game:
                         )
             return score
 
-        def h0():
+        def e0():
             attacker_units = self.player_units(Player.Attacker)
             defender_units = self.player_units(Player.Defender)
 
@@ -653,7 +654,7 @@ class Game:
                 - 9999 * ai_other
             )
 
-        def h1():
+        def e1():
             attacker_units = self.player_units(Player.Attacker)
             defender_units = self.player_units(Player.Defender)
 
@@ -662,7 +663,7 @@ class Game:
 
             return atk_score - def_score
 
-        def h2():
+        def e2():
             attacker_units = self.player_units(Player.Attacker)
             defender_units = self.player_units(Player.Defender)
 
@@ -674,32 +675,36 @@ class Game:
             ai_attacker_coord = findAI(attacker_units)
             ai_defender_coord = findAI(defender_units)
 
+
             atk_to_def_ai = 0
             def_to_atk_ai = 0
 
             for attacker_coord, _ in attacker_units:
-                atk_to_def_ai += manhattan_distance(attacker_coord, ai_defender_coord)
+                atk_to_def_ai += 10 - manhattan_distance(attacker_coord, ai_defender_coord)
 
             for defender_coord, _ in defender_units:
-                def_to_atk_ai += manhattan_distance(defender_coord, ai_attacker_coord)
+                def_to_atk_ai += 10 - manhattan_distance(defender_coord, ai_attacker_coord)
 
-            return atk_to_def_ai - def_to_atk_ai
+            return atk_to_def_ai - def_to_atk_ai 
 
         match heuristic_number:
             case 0:
-                return h0()
+                return e0()
             case 1:
-                return h1()
+                return e1()
             case 2:
-                return h2()
+                return e2()
             case _:
-                return h0()
+                return e0()
 
     def minimax(
         self, maximize: bool, depth: int
     ) -> Tuple[int | None, CoordPair | None]:
         # print(self.to_string())
         possible_moves = list(self.move_candidates())
+        if self.options.random:
+            random.shuffle(possible_moves)
+
         self.stats.evaluations_per_depth[depth] += 1
 
         # Check if we are at the end of the game or at the max depth
@@ -759,12 +764,16 @@ class Game:
         if depth == 0 or self.is_finished():
             return (self.heuristic_score(self.options.heuristic), best_move, 0)
 
+        possible_moves = list(self.move_candidates())
+        
+        if self.options.random:
+            random.shuffle(possible_moves)
+
         # Maximizing
         if maximize:
             max_score = MIN_HEURISTIC_SCORE
-            possible_moves = list(self.move_candidates())
-            # random.shuffle(possible_moves)
-            for move in self.move_candidates():
+
+            for move in possible_moves:
                 # check if we have enough time
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
                 if elapsed_time > max(
@@ -793,9 +802,8 @@ class Game:
         # Minimizing
         else:
             min_score = MAX_HEURISTIC_SCORE
-            possible_moves = list(self.move_candidates())
-            # random.shuffle(possible_moves)
-            for move in self.move_candidates():
+
+            for move in possible_moves:
                 elapsed_time = (datetime.now() - self.stats.start_time).total_seconds()
                 if elapsed_time > max(
                     self.options.max_time - 1, self.options.max_time * 0.70
@@ -956,7 +964,8 @@ def main():
     parser.add_argument("--broker", type=str, help="play via a game broker")
     parser.add_argument("--max_turns", type=int, help="maximum number of turns")
     parser.add_argument("--alpha_beta", help="type False this to turn off alpha_beta")
-    parser.add_argument("--heuristic", type=int, help="0, 1, 2")
+    parser.add_argument("--h", type=int, help="0, 1, 2")
+    parser.add_argument("--random", help="type True to randomly shuffle equal value moves (False by default)")
     args = parser.parse_args()
 
     # parse the game type
@@ -983,8 +992,10 @@ def main():
         options.max_turns = args.max_turns
     if args.alpha_beta is not None:
         options.alpha_beta = False if args.alpha_beta.lower() == "false" else True
-    if args.heuristic is not None:
-        options.heuristic = args.heuristic
+    if args.h is not None:
+        options.heuristic = args.h
+    if args.random is not None:
+        options.random = True
 
     # create a new game
     game = Game(options=options)
