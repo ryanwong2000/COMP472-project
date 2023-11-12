@@ -1,0 +1,76 @@
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[135  47 132]
+ [ 48 218  65]
+ [166  78 156]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.386819  0.429936  0.407240
+I   0.635569  0.658610  0.646884
+M   0.441926  0.390000  0.414343
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.48708133971291867
+Macro-Average F1 Score: 0.4894889071612098
+Weighted-Average F1 Score: 0.48586511896867685
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': 6, 'min_samples_leaf': 6}
+
+(B) Confusion Matrix
+[[ 69  39 206]
+ [ 26 259  46]
+ [ 90  62 248]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.372973  0.219745  0.276553
+I   0.719444  0.782477  0.749638
+M   0.496000  0.620000  0.551111
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5511961722488038
+Macro-Average F1 Score: 0.5257674742742707
+Weighted-Average F1 Score: 0.531495086904695
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[  0  43 271]
+ [  0 242  89]
+ [  0  76 324]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.670360  0.731118  0.699422
+M   0.473684  0.810000  0.597786
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5416267942583732
+Macro-Average F1 Score: 0.43240264772589915
+Weighted-Average F1 Score: 0.45035699680779195
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[ 14  40 260]
+ [  4 271  56]
+ [ 21  82 297]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.358974  0.044586  0.079320
+I   0.689567  0.818731  0.748619
+M   0.484502  0.742500  0.586377
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5569377990430622
+Macro-Average F1 Score: 0.4714386651914502
+Weighted-Average F1 Score: 0.4854068634948336
+

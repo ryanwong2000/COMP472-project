@@ -1,0 +1,76 @@
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[46  1  0]
+ [ 0 15  0]
+ [ 0  0 22]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie        1.0000  0.978723  0.989247
+Chinstrap     0.9375  1.000000  0.967742
+Gentoo        1.0000  1.000000  1.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.985663082437276
+Weighted-Average F1 Score: 0.9882232462877623
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': 2, 'min_samples_leaf': 4}
+
+(B) Confusion Matrix
+[[46  1  0]
+ [ 2 13  0]
+ [ 0  0 22]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.958333  0.978723  0.968421
+Chinstrap   0.928571  0.866667  0.896552
+Gentoo      1.000000  1.000000  1.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9642857142857143
+Macro-Average F1 Score: 0.9549909255898367
+Weighted-Average F1 Score: 0.9638579206637283
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[47  0  0]
+ [15  0  0]
+ [22  0  0]]
+
+(C) Precision, Recall, F1 Score
+           precision  recall  f1-score
+Adelie      0.559524     1.0  0.717557
+Chinstrap   0.000000     0.0  0.000000
+Gentoo      0.000000     0.0  0.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5595238095238095
+Macro-Average F1 Score: 0.23918575063613232
+Weighted-Average F1 Score: 0.4014903671392221
+
+========================================
+(A) Top-MLP {'activation': 'relu', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[46  1  0]
+ [ 2 13  0]
+ [ 0  0 22]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.958333  0.978723  0.968421
+Chinstrap   0.928571  0.866667  0.896552
+Gentoo      1.000000  1.000000  1.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9642857142857143
+Macro-Average F1 Score: 0.9549909255898367
+Weighted-Average F1 Score: 0.9638579206637283
+

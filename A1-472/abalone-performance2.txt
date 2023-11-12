@@ -1,0 +1,380 @@
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[132  56 124]
+ [ 47 214  76]
+ [165  75 156]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.383721  0.423077  0.402439
+I   0.620290  0.635015  0.627566
+M   0.438202  0.393939  0.414894
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.48038277511961724
+Macro-Average F1 Score: 0.48163287460540416
+Weighted-Average F1 Score: 0.47975941054599314
+
+========================================
+(A) Top-DT {'criterion': 'entropy', 'max_depth': 6, 'min_samples_leaf': 3}
+
+(B) Confusion Matrix
+[[133  57 122]
+ [ 29 265  43]
+ [120  79 197]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.471631  0.426282  0.447811
+I   0.660848  0.786350  0.718157
+M   0.544199  0.497475  0.519789
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.569377990430622
+Macro-Average F1 Score: 0.5619191825296895
+Weighted-Average F1 Score: 0.5622703861400692
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[  0  50 262]
+ [  0 235 102]
+ [  0  68 328]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.665722  0.697329  0.681159
+M   0.473988  0.828283  0.602941
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.538755980861244
+Macro-Average F1 Score: 0.4280335322534811
+Weighted-Average F1 Score: 0.4481487373397456
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[100  53 159]
+ [ 12 290  35]
+ [ 87  94 215]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.502513  0.320513  0.391389
+I   0.663616  0.860534  0.749354
+M   0.525672  0.542929  0.534161
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5789473684210527
+Macro-Average F1 Score: 0.5583016427788371
+Weighted-Average F1 Score: 0.5609318210407481
+
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[139  61 140]
+ [ 49 195  73]
+ [138  74 176]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.426380  0.408824  0.417417
+I   0.590909  0.615142  0.602782
+M   0.452442  0.453608  0.453024
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.4880382775119617
+Macro-Average F1 Score: 0.49107464717974764
+Weighted-Average F1 Score: 0.4868682547686859
+
+========================================
+(A) Top-DT {'criterion': 'entropy', 'max_depth': 6, 'min_samples_leaf': 4}
+
+(B) Confusion Matrix
+[[102  46 192]
+ [ 21 245  51]
+ [ 83  81 224]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.495146  0.300000  0.373626
+I   0.658602  0.772871  0.711176
+M   0.479657  0.577320  0.523977
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5464114832535886
+Macro-Average F1 Score: 0.5362595328831674
+Weighted-Average F1 Score: 0.5318455134417084
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[  0  52 288]
+ [  0 208 109]
+ [  0  79 309]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.613569  0.656151  0.634146
+M   0.437677  0.796392  0.564899
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.49473684210526314
+Macro-Average F1 Score: 0.3996819310057817
+Weighted-Average F1 Score: 0.40211040904002626
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[ 62  50 228]
+ [ 10 251  56]
+ [ 56  83 249]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.484375  0.182353  0.264957
+I   0.653646  0.791798  0.716120
+M   0.467167  0.641753  0.540717
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5377990430622009
+Macro-Average F1 Score: 0.5072645687170306
+Weighted-Average F1 Score: 0.50420430758157
+
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[149  52 145]
+ [ 44 222  63]
+ [132  67 171]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.458462  0.430636  0.444113
+I   0.651026  0.674772  0.662687
+M   0.451187  0.462162  0.456609
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5186602870813397
+Macro-Average F1 Score: 0.5211362142328576
+Weighted-Average F1 Score: 0.517351512166403
+
+========================================
+(A) Top-DT {'criterion': 'entropy', 'max_depth': 6, 'min_samples_leaf': 6}
+
+(B) Confusion Matrix
+[[ 84  54 208]
+ [ 13 243  73]
+ [ 60  78 232]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.535032  0.242775  0.333996
+I   0.648000  0.738602  0.690341
+M   0.452242  0.627027  0.525481
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5349282296650718
+Macro-Average F1 Score: 0.5166060822170174
+Weighted-Average F1 Score: 0.5139836070962656
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[  0  22 324]
+ [  0 168 161]
+ [  0  27 343]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.774194  0.510638  0.615385
+M   0.414251  0.927027  0.572621
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.48899521531100476
+Macro-Average F1 Score: 0.39600188348101534
+Weighted-Average F1 Score: 0.3964893028068495
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[ 30  45 271]
+ [  1 261  67]
+ [ 25  75 270]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.535714  0.086705  0.149254
+I   0.685039  0.793313  0.735211
+M   0.444079  0.729730  0.552147
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5368421052631579
+Macro-Average F1 Score: 0.478870746070907
+Weighted-Average F1 Score: 0.47638351829151865
+
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[143  49 130]
+ [ 44 202  82]
+ [152  69 174]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.421829  0.444099  0.432678
+I   0.631250  0.615854  0.623457
+M   0.450777  0.440506  0.445583
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.4966507177033493
+Macro-Average F1 Score: 0.5005723791731146
+Weighted-Average F1 Score: 0.4974365433791276
+
+========================================
+(A) Top-DT {'criterion': 'entropy', 'max_depth': 2, 'min_samples_leaf': 4}
+
+(B) Confusion Matrix
+[[  0  80 242]
+ [  0 264  64]
+ [  0 104 291]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.589286  0.804878  0.680412
+M   0.487437  0.736709  0.586694
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5311004784688995
+Macro-Average F1 Score: 0.4223686398403725
+Weighted-Average F1 Score: 0.4353293869328823
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[  0  43 279]
+ [  0 208 120]
+ [  0  87 308]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.615385  0.634146  0.624625
+M   0.435644  0.779747  0.558984
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.4937799043062201
+Macro-Average F1 Score: 0.3945360968954435
+Weighted-Average F1 Score: 0.4073449042787088
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[173  51  98]
+ [ 36 256  36]
+ [199  77 119]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.424020  0.537267  0.473973
+I   0.666667  0.780488  0.719101
+M   0.470356  0.301266  0.367284
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5244019138755981
+Macro-Average F1 Score: 0.5201192256508386
+Weighted-Average F1 Score: 0.5105851742730572
+
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[114  68 135]
+ [ 53 217  82]
+ [139  64 173]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.372549  0.359621  0.365971
+I   0.621777  0.616477  0.619116
+M   0.443590  0.460106  0.451697
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.48229665071770333
+Macro-Average F1 Score: 0.47892792823229485
+Weighted-Average F1 Score: 0.48208577466005215
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': 6, 'min_samples_leaf': 4}
+
+(B) Confusion Matrix
+[[ 99  45 173]
+ [ 27 262  63]
+ [118  46 212]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.405738  0.312303  0.352941
+I   0.742210  0.744318  0.743262
+M   0.473214  0.563830  0.514563
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5483253588516747
+Macro-Average F1 Score: 0.5369222315380742
+Weighted-Average F1 Score: 0.5425707654457823
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[  0  12 305]
+ [  0 178 174]
+ [  0  28 348]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.000000  0.000000  0.000000
+I   0.816514  0.505682  0.624561
+M   0.420798  0.925532  0.578554
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5033492822966508
+Macro-Average F1 Score: 0.4010383398229573
+Weighted-Average F1 Score: 0.41854715180486624
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[122  48 147]
+ [  9 289  54]
+ [135  71 170]]
+
+(C) Precision, Recall, F1 Score
+   precision    recall  f1-score
+F   0.458647  0.384858  0.418525
+I   0.708333  0.821023  0.760526
+M   0.458221  0.452128  0.455154
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5559808612440191
+Macro-Average F1 Score: 0.5447350454247956
+Weighted-Average F1 Score: 0.546904815550501
+
