@@ -2,219 +2,114 @@
 (A) Base-DT
 
 (B) Confusion Matrix
-[[32  2  0]
- [ 1 18  0]
- [ 0  0 31]]
+[[30  0  0]
+ [ 1 19  0]
+ [ 1  0 33]]
 
 (C) Precision, Recall, F1 Score
            precision    recall  f1-score
-Adelie      0.969697  0.941176  0.955224
-Chinstrap   0.900000  0.947368  0.923077
-Gentoo      1.000000  1.000000  1.000000
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9642857142857143
-Macro-Average F1 Score: 0.9594336012246462
-Weighted-Average F1 Score: 0.9644770652233339
-
-========================================
-(A) Top-DT {'criterion': 'entropy', 'max_depth': 6, 'min_samples_leaf': 3}
-
-(B) Confusion Matrix
-[[33  1  0]
- [ 0 19  0]
- [ 1  0 30]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie      0.970588  0.970588  0.970588
-Chinstrap   0.950000  1.000000  0.974359
-Gentoo      1.000000  0.967742  0.983607
+Adelie        0.9375  1.000000  0.967742
+Chinstrap     1.0000  0.950000  0.974359
+Gentoo        1.0000  0.970588  0.985075
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
 Accuracy: 0.9761904761904762
-Macro-Average F1 Score: 0.976184589010047
-Weighted-Average F1 Score: 0.9762455213274885
+Macro-Average F1 Score: 0.9757251789028389
+Weighted-Average F1 Score: 0.976333034108672
+
+========================================
+(A) Top-DT {'criterion': 'entropy', 'max_depth': None, 'min_samples_split': 3}
+
+(B) Confusion Matrix
+[[30  0  0]
+ [ 1 19  0]
+ [ 0  0 34]]
+
+(C) Precision, Recall, F1 Score
+           precision  recall  f1-score
+Adelie      0.967742    1.00  0.983607
+Chinstrap   1.000000    0.95  0.974359
+Gentoo      1.000000    1.00  1.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9859885105786744
+Weighted-Average F1 Score: 0.9880401929582258
 
 ========================================
 (A) Base-MLP
 
 (B) Confusion Matrix
-[[34  0  0]
- [19  0  0]
- [31  0  0]]
+[[30  0  0]
+ [20  0  0]
+ [34  0  0]]
 
 (C) Precision, Recall, F1 Score
            precision  recall  f1-score
-Adelie      0.404762     1.0  0.576271
+Adelie      0.357143     1.0  0.526316
 Chinstrap   0.000000     0.0  0.000000
 Gentoo      0.000000     0.0  0.000000
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.40476190476190477
-Macro-Average F1 Score: 0.192090395480226
-Weighted-Average F1 Score: 0.23325262308313158
+Accuracy: 0.35714285714285715
+Macro-Average F1 Score: 0.17543859649122806
+Weighted-Average F1 Score: 0.18796992481203006
 
 ========================================
-(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'sgd'}
 
 (B) Confusion Matrix
-[[33  1  0]
- [ 0 19  0]
- [ 1  0 30]]
+[[30  0  0]
+ [ 1 19  0]
+ [ 0  0 34]]
 
 (C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie      0.970588  0.970588  0.970588
-Chinstrap   0.950000  1.000000  0.974359
-Gentoo      1.000000  0.967742  0.983607
+           precision  recall  f1-score
+Adelie      0.967742    1.00  0.983607
+Chinstrap   1.000000    0.95  0.974359
+Gentoo      1.000000    1.00  1.000000
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9761904761904762
-Macro-Average F1 Score: 0.976184589010047
-Weighted-Average F1 Score: 0.9762455213274885
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9859885105786744
+Weighted-Average F1 Score: 0.9880401929582258
 
 ========================================
 PENGUIN base_dt
-	Average accuracy: 0.9642857142857143
-	Variance accuracy: 0.0
-	Average macro_average: 0.9594336012246462
-	Variance macro_average: 0.0
-	Average weighted_average: 0.9644770652233339
-	Variance weighted_average: 0.0
-PENGUIN top_dt
 	Average accuracy: 0.9761904761904762
 	Variance accuracy: 0.0
-	Average macro_average: 0.976184589010047
+	Average macro_average: 0.9757251789028389
 	Variance macro_average: 0.0
-	Average weighted_average: 0.9762455213274885
+	Average weighted_average: 0.976333034108672
 	Variance weighted_average: 0.0
-PENGUIN base_mlp
-	Average accuracy: 0.40476190476190477
-	Variance accuracy: 0.0
-	Average macro_average: 0.192090395480226
-	Variance macro_average: 0.0
-	Average weighted_average: 0.23325262308313158
-	Variance weighted_average: 0.0
-PENGUIN top_mlp
-	Average accuracy: 0.9761904761904762
-	Variance accuracy: 0.0
-	Average macro_average: 0.976184589010047
-	Variance macro_average: 0.0
-	Average weighted_average: 0.9762455213274885
-	Variance weighted_average: 0.0
-========================================
-(A) Base-DT
-
-(B) Confusion Matrix
-[[32  1  0]
- [ 0 24  0]
- [ 0  1 26]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie      1.000000  0.969697  0.984615
-Chinstrap   0.923077  1.000000  0.960000
-Gentoo      1.000000  0.962963  0.981132
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9761904761904762
-Macro-Average F1 Score: 0.9752491533623608
-Weighted-Average F1 Score: 0.9764627825005183
-
-========================================
-(A) Top-DT {'criterion': 'entropy', 'max_depth': None, 'min_samples_leaf': 4}
-
-(B) Confusion Matrix
-[[33  0  0]
- [ 6 18  0]
- [ 1  0 26]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie         0.825  1.000000  0.904110
-Chinstrap      1.000  0.750000  0.857143
-Gentoo         1.000  0.962963  0.981132
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9166666666666666
-Macro-Average F1 Score: 0.914128173885217
-Weighted-Average F1 Score: 0.9154477505657213
-
-========================================
-(A) Base-MLP
-
-(B) Confusion Matrix
-[[33  0  0]
- [24  0  0]
- [27  0  0]]
-
-(C) Precision, Recall, F1 Score
-           precision  recall  f1-score
-Adelie      0.392857     1.0  0.564103
-Chinstrap   0.000000     0.0  0.000000
-Gentoo      0.000000     0.0  0.000000
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.39285714285714285
-Macro-Average F1 Score: 0.18803418803418803
-Weighted-Average F1 Score: 0.22161172161172163
-
-========================================
-(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
-
-(B) Confusion Matrix
-[[33  0  0]
- [ 6 18  0]
- [ 1  0 26]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie         0.825  1.000000  0.904110
-Chinstrap      1.000  0.750000  0.857143
-Gentoo         1.000  0.962963  0.981132
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9166666666666666
-Macro-Average F1 Score: 0.914128173885217
-Weighted-Average F1 Score: 0.9154477505657213
-
-========================================
-PENGUIN base_dt
-	Average accuracy: 0.9702380952380952
-	Variance accuracy: 3.5430839002267324e-05
-	Average macro_average: 0.9673413772935036
-	Variance macro_average: 6.253292235519286e-05
-	Average weighted_average: 0.9704699238619261
-	Variance weighted_average: 3.591435466214945e-05
 PENGUIN top_dt
-	Average accuracy: 0.9464285714285714
-	Variance accuracy: 0.0008857709750566896
-	Average macro_average: 0.945156381447632
-	Variance macro_average: 0.000962749664536306
-	Average weighted_average: 0.9458466359466049
-	Variance weighted_average: 0.0009240922324001014
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0
+	Average macro_average: 0.9859885105786744
+	Variance macro_average: 0.0
+	Average weighted_average: 0.9880401929582258
+	Variance weighted_average: 0.0
 PENGUIN base_mlp
-	Average accuracy: 0.39880952380952384
-	Variance accuracy: 3.543083900226765e-05
-	Average macro_average: 0.190062291757207
-	Variance macro_average: 4.113204711323453e-06
-	Average weighted_average: 0.2274321723474266
-	Variance weighted_average: 3.3877646766768574e-05
+	Average accuracy: 0.35714285714285715
+	Variance accuracy: 0.0
+	Average macro_average: 0.17543859649122806
+	Variance macro_average: 0.0
+	Average weighted_average: 0.18796992481203006
+	Variance weighted_average: 0.0
 PENGUIN top_mlp
-	Average accuracy: 0.9464285714285714
-	Variance accuracy: 0.0008857709750566896
-	Average macro_average: 0.945156381447632
-	Variance macro_average: 0.000962749664536306
-	Average weighted_average: 0.9458466359466049
-	Variance weighted_average: 0.0009240922324001014
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0
+	Average macro_average: 0.9859885105786744
+	Variance macro_average: 0.0
+	Average weighted_average: 0.9880401929582258
+	Variance weighted_average: 0.0
 ========================================
 (A) Base-DT
 
 (B) Confusion Matrix
-[[34  0  0]
- [ 0 12  0]
- [ 0  0 38]]
+[[39  0  0]
+ [ 0 16  0]
+ [ 0  0 29]]
 
 (C) Precision, Recall, F1 Score
            precision  recall  f1-score
@@ -228,241 +123,241 @@ Macro-Average F1 Score: 1.0
 Weighted-Average F1 Score: 1.0
 
 ========================================
-(A) Top-DT {'criterion': 'gini', 'max_depth': 6, 'min_samples_leaf': 3}
+(A) Top-DT {'criterion': 'gini', 'max_depth': 6, 'min_samples_split': 3}
 
 (B) Confusion Matrix
-[[34  0  0]
- [ 0 12  0]
- [ 0  0 38]]
+[[39  0  0]
+ [ 1 15  0]
+ [ 0  0 29]]
 
 (C) Precision, Recall, F1 Score
            precision  recall  f1-score
-Adelie           1.0     1.0       1.0
-Chinstrap        1.0     1.0       1.0
-Gentoo           1.0     1.0       1.0
+Adelie         0.975  1.0000  0.987342
+Chinstrap      1.000  0.9375  0.967742
+Gentoo         1.000  1.0000  1.000000
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 1.0
-Macro-Average F1 Score: 1.0
-Weighted-Average F1 Score: 1.0
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9850279025452565
+Weighted-Average F1 Score: 0.9879785724007856
 
 ========================================
 (A) Base-MLP
 
 (B) Confusion Matrix
-[[34  0  0]
- [12  0  0]
- [38  0  0]]
-
-(C) Precision, Recall, F1 Score
-           precision  recall  f1-score
-Adelie      0.404762     1.0  0.576271
-Chinstrap   0.000000     0.0  0.000000
-Gentoo      0.000000     0.0  0.000000
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.40476190476190477
-Macro-Average F1 Score: 0.192090395480226
-Weighted-Average F1 Score: 0.23325262308313158
-
-========================================
-(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
-
-(B) Confusion Matrix
-[[34  0  0]
- [ 0 12  0]
- [ 0  0 38]]
-
-(C) Precision, Recall, F1 Score
-           precision  recall  f1-score
-Adelie           1.0     1.0       1.0
-Chinstrap        1.0     1.0       1.0
-Gentoo           1.0     1.0       1.0
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 1.0
-Macro-Average F1 Score: 1.0
-Weighted-Average F1 Score: 1.0
-
-========================================
-PENGUIN base_dt
-	Average accuracy: 0.9801587301587302
-	Variance accuracy: 0.00022045855379188703
-	Average macro_average: 0.9782275848623357
-	Variance macro_average: 0.0002787076453668594
-	Average weighted_average: 0.9803132825746174
-	Variance weighted_average: 0.0002177263246015311
-PENGUIN top_dt
-	Average accuracy: 0.9642857142857143
-	Variance accuracy: 0.0012282690854119435
-	Average macro_average: 0.9634375876317547
-	Variance macro_average: 0.0013102381087836798
-	Average weighted_average: 0.9638977572977366
-	Variance weighted_average: 0.0012677474523332998
-PENGUIN base_mlp
-	Average accuracy: 0.40079365079365087
-	Variance accuracy: 3.14940791131268e-05
-	Average macro_average: 0.19073832633154666
-	Variance macro_average: 3.6561819656208467e-06
-	Average weighted_average: 0.2293723225926616
-	Variance weighted_average: 3.0113463792683178e-05
-PENGUIN top_mlp
-	Average accuracy: 0.9642857142857143
-	Variance accuracy: 0.0012282690854119435
-	Average macro_average: 0.9634375876317547
-	Variance macro_average: 0.0013102381087836798
-	Average weighted_average: 0.9638977572977366
-	Variance weighted_average: 0.0012677474523332998
-========================================
-(A) Base-DT
-
-(B) Confusion Matrix
-[[42  1  0]
- [ 0 12  0]
- [ 1  0 28]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie      0.976744  0.976744  0.976744
-Chinstrap   0.923077  1.000000  0.960000
-Gentoo      1.000000  0.965517  0.982456
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9761904761904762
-Macro-Average F1 Score: 0.9730667754657962
-Weighted-Average F1 Score: 0.9763241436925647
-
-========================================
-(A) Top-DT {'criterion': 'gini', 'max_depth': 6, 'min_samples_leaf': 3}
-
-(B) Confusion Matrix
-[[41  2  0]
- [ 0 12  0]
- [ 0  1 28]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie           1.0  0.953488  0.976190
-Chinstrap        0.8  1.000000  0.888889
-Gentoo           1.0  0.965517  0.982456
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9642857142857143
-Macro-Average F1 Score: 0.9491785018100808
-Weighted-Average F1 Score: 0.9658819668218166
-
-========================================
-(A) Base-MLP
-
-(B) Confusion Matrix
-[[43  0  0]
- [12  0  0]
+[[39  0  0]
+ [16  0  0]
  [29  0  0]]
 
 (C) Precision, Recall, F1 Score
            precision  recall  f1-score
-Adelie      0.511905     1.0  0.677165
+Adelie      0.464286     1.0  0.634146
 Chinstrap   0.000000     0.0  0.000000
 Gentoo      0.000000     0.0  0.000000
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.5119047619047619
-Macro-Average F1 Score: 0.22572178477690288
-Weighted-Average F1 Score: 0.34664416947881516
+Accuracy: 0.4642857142857143
+Macro-Average F1 Score: 0.21138211382113822
+Weighted-Average F1 Score: 0.2944250871080139
 
 ========================================
-(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 
 (B) Confusion Matrix
-[[41  2  0]
- [ 0 12  0]
- [ 0  1 28]]
+[[39  0  0]
+ [ 1 15  0]
+ [ 0  0 29]]
 
 (C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie           1.0  0.953488  0.976190
-Chinstrap        0.8  1.000000  0.888889
-Gentoo           1.0  0.965517  0.982456
+           precision  recall  f1-score
+Adelie         0.975  1.0000  0.987342
+Chinstrap      1.000  0.9375  0.967742
+Gentoo         1.000  1.0000  1.000000
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9642857142857143
-Macro-Average F1 Score: 0.9491785018100808
-Weighted-Average F1 Score: 0.9658819668218166
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9850279025452565
+Weighted-Average F1 Score: 0.9879785724007856
 
 ========================================
 PENGUIN base_dt
-	Average accuracy: 0.9791666666666667
-	Variance accuracy: 0.00016829648526077093
-	Average macro_average: 0.9769373825132008
-	Variance macro_average: 0.00021402460033028388
-	Average weighted_average: 0.9793159978541042
-	Variance weighted_average: 0.00016627847389245545
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0001417233560090706
+	Average macro_average: 0.9878625894514195
+	Variance macro_average: 0.0001473167348247939
+	Average weighted_average: 0.988166517054336
+	Variance weighted_average: 0.0001400313186253207
 PENGUIN top_dt
-	Average accuracy: 0.9642857142857143
-	Variance accuracy: 0.0009212018140589576
-	Average macro_average: 0.9598728161763362
-	Variance macro_average: 0.0010208013681758585
-	Average weighted_average: 0.9643938096787565
-	Variance weighted_average: 0.0009515487931441218
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0
+	Average macro_average: 0.9855082065619655
+	Variance macro_average: 2.3069194846675566e-07
+	Average weighted_average: 0.9880093826795057
+	Variance weighted_average: 9.492732748099257e-10
 PENGUIN base_mlp
-	Average accuracy: 0.4285714285714286
-	Variance accuracy: 0.002338435374149658
-	Average macro_average: 0.19948419094288572
-	Variance macro_average: 0.00023221257987383404
-	Average weighted_average: 0.2586902843142
-	Variance weighted_average: 0.0026012137363612834
+	Average accuracy: 0.4107142857142857
+	Variance accuracy: 0.002869897959183674
+	Average macro_average: 0.19341035515618316
+	Variance macro_average: 0.00032298410951138803
+	Average weighted_average: 0.24119750596002199
+	Variance weighted_average: 0.002833175394866065
 PENGUIN top_mlp
-	Average accuracy: 0.9642857142857143
-	Variance accuracy: 0.0009212018140589576
-	Average macro_average: 0.9598728161763362
-	Variance macro_average: 0.0010208013681758585
-	Average weighted_average: 0.9643938096787565
-	Variance weighted_average: 0.0009515487931441218
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0
+	Average macro_average: 0.9855082065619655
+	Variance macro_average: 2.3069194846675566e-07
+	Average weighted_average: 0.9880093826795057
+	Variance weighted_average: 9.492732748099257e-10
 ========================================
 (A) Base-DT
 
 (B) Confusion Matrix
-[[35  2  0]
- [ 1 19  0]
- [ 0  0 27]]
+[[34  0  1]
+ [ 0 11  0]
+ [ 0  0 38]]
 
 (C) Precision, Recall, F1 Score
            precision    recall  f1-score
-Adelie      0.972222  0.945946  0.958904
-Chinstrap   0.904762  0.950000  0.926829
-Gentoo      1.000000  1.000000  1.000000
+Adelie      1.000000  0.971429  0.985507
+Chinstrap   1.000000  1.000000  1.000000
+Gentoo      0.974359  1.000000  0.987013
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9908400777965994
+Weighted-Average F1 Score: 0.988086275353356
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 6}
+
+(B) Confusion Matrix
+[[34  0  1]
+ [ 0 11  0]
+ [ 0  0 38]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      1.000000  0.971429  0.985507
+Chinstrap   1.000000  1.000000  1.000000
+Gentoo      0.974359  1.000000  0.987013
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9908400777965994
+Weighted-Average F1 Score: 0.988086275353356
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[35  0  0]
+ [11  0  0]
+ [38  0  0]]
+
+(C) Precision, Recall, F1 Score
+           precision  recall  f1-score
+Adelie      0.416667     1.0  0.588235
+Chinstrap   0.000000     0.0  0.000000
+Gentoo      0.000000     0.0  0.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.4166666666666667
+Macro-Average F1 Score: 0.19607843137254902
+Weighted-Average F1 Score: 0.2450980392156863
+
+========================================
+(A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[34  0  1]
+ [ 0 11  0]
+ [ 0  0 38]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      1.000000  0.971429  0.985507
+Chinstrap   1.000000  1.000000  1.000000
+Gentoo      0.974359  1.000000  0.987013
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9908400777965994
+Weighted-Average F1 Score: 0.988086275353356
+
+========================================
+PENGUIN base_dt
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 9.44822373393804e-05
+	Average macro_average: 0.9888550855664794
+	Variance macro_average: 0.00010018125362668095
+	Average weighted_average: 0.988139769820676
+	Variance weighted_average: 9.335564324589739e-05
+PENGUIN top_dt
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0
+	Average macro_average: 0.9872854969735102
+	Variance macro_average: 6.471317046248313e-06
+	Average weighted_average: 0.988035013570789
+	Variance weighted_average: 1.9467340258416736e-09
+PENGUIN base_mlp
+	Average accuracy: 0.41269841269841273
+	Variance accuracy: 0.0019211388259007308
+	Average macro_average: 0.19429971389497178
+	Variance macro_average: 0.0002169046576067781
+	Average weighted_average: 0.24249768371191008
+	Variance weighted_average: 0.001892164520950386
+PENGUIN top_mlp
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 0.0
+	Average macro_average: 0.9872854969735102
+	Variance macro_average: 6.471317046248313e-06
+	Average weighted_average: 0.988035013570789
+	Variance weighted_average: 1.9467340258416736e-09
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[36  0  1]
+ [ 0 18  0]
+ [ 0  0 29]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      1.000000  0.972973  0.986301
+Chinstrap   1.000000  1.000000  1.000000
+Gentoo      0.966667  1.000000  0.983051
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9880952380952381
+Macro-Average F1 Score: 0.9897840724402136
+Weighted-Average F1 Score: 0.9881145864428892
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 6}
+
+(B) Confusion Matrix
+[[37  0  0]
+ [ 2 16  0]
+ [ 1  0 28]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie         0.925  1.000000  0.961039
+Chinstrap      1.000  0.888889  0.941176
+Gentoo         1.000  0.965517  0.982456
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
 Accuracy: 0.9642857142857143
-Macro-Average F1 Score: 0.9619111259605747
-Weighted-Average F1 Score: 0.9644766359600974
-
-========================================
-(A) Top-DT {'criterion': 'gini', 'max_depth': 6, 'min_samples_leaf': 3}
-
-(B) Confusion Matrix
-[[35  2  0]
- [ 1 19  0]
- [ 1  0 26]]
-
-(C) Precision, Recall, F1 Score
-           precision    recall  f1-score
-Adelie      0.945946  0.945946  0.945946
-Chinstrap   0.904762  0.950000  0.926829
-Gentoo      1.000000  0.962963  0.981132
-
-(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
-Accuracy: 0.9523809523809523
-Macro-Average F1 Score: 0.9513024299034424
-Weighted-Average F1 Score: 0.9527041833760654
+Macro-Average F1 Score: 0.9615571906593577
+Weighted-Average F1 Score: 0.9641767392762527
 
 ========================================
 (A) Base-MLP
 
 (B) Confusion Matrix
 [[37  0  0]
- [20  0  0]
- [27  0  0]]
+ [18  0  0]
+ [29  0  0]]
 
 (C) Precision, Recall, F1 Score
            precision  recall  f1-score
@@ -479,47 +374,257 @@ Weighted-Average F1 Score: 0.2693821330184966
 (A) Top-MLP {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
 
 (B) Confusion Matrix
-[[35  2  0]
- [ 1 19  0]
- [ 1  0 26]]
+[[37  0  0]
+ [ 2 16  0]
+ [ 1  0 28]]
 
 (C) Precision, Recall, F1 Score
            precision    recall  f1-score
-Adelie      0.945946  0.945946  0.945946
-Chinstrap   0.904762  0.950000  0.926829
-Gentoo      1.000000  0.962963  0.981132
+Adelie         0.925  1.000000  0.961039
+Chinstrap      1.000  0.888889  0.941176
+Gentoo         1.000  0.965517  0.982456
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9642857142857143
+Macro-Average F1 Score: 0.9615571906593577
+Weighted-Average F1 Score: 0.9641767392762527
+
+========================================
+PENGUIN base_dt
+	Average accuracy: 0.9880952380952381
+	Variance accuracy: 7.08616780045353e-05
+	Average macro_average: 0.989087332284913
+	Variance macro_average: 7.529775583468014e-05
+	Average weighted_average: 0.9881334739762293
+	Variance weighted_average: 7.001685134739493e-05
+PENGUIN top_dt
+	Average accuracy: 0.9821428571428572
+	Variance accuracy: 0.00010629251700680296
+	Average macro_average: 0.980853420394972
+	Variance macro_average: 0.00012896831512122127
+	Average weighted_average: 0.982070444997155
+	Variance weighted_average: 0.00010672969485927018
+PENGUIN base_mlp
+	Average accuracy: 0.41964285714285715
+	Variance accuracy: 0.001585530045351474
+	Average macro_average: 0.1966889727490525
+	Variance macro_average: 0.00017980416682049328
+	Average weighted_average: 0.24921879603855673
+	Variance weighted_average: 0.0015546434434349937
+PENGUIN top_mlp
+	Average accuracy: 0.9821428571428572
+	Variance accuracy: 0.00010629251700680296
+	Average macro_average: 0.980853420394972
+	Variance macro_average: 0.00012896831512122127
+	Average weighted_average: 0.982070444997155
+	Variance weighted_average: 0.00010672969485927018
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[41  1  0]
+ [ 1 15  0]
+ [ 2  0 24]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.931818  0.976190  0.953488
+Chinstrap   0.937500  0.937500  0.937500
+Gentoo      1.000000  0.923077  0.960000
 
 (D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
 Accuracy: 0.9523809523809523
-Macro-Average F1 Score: 0.9513024299034424
-Weighted-Average F1 Score: 0.9527041833760654
+Macro-Average F1 Score: 0.950329457364341
+Weighted-Average F1 Score: 0.9524584717607973
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 6}
+
+(B) Confusion Matrix
+[[42  0  0]
+ [ 2 14  0]
+ [ 2  0 24]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.913043  1.000000  0.954545
+Chinstrap   1.000000  0.875000  0.933333
+Gentoo      1.000000  0.923077  0.960000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9523809523809523
+Macro-Average F1 Score: 0.9492929292929292
+Weighted-Average F1 Score: 0.952193362193362
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[42  0  0]
+ [16  0  0]
+ [26  0  0]]
+
+(C) Precision, Recall, F1 Score
+           precision  recall  f1-score
+Adelie           0.5     1.0  0.666667
+Chinstrap        0.0     0.0  0.000000
+Gentoo           0.0     0.0  0.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.5
+Macro-Average F1 Score: 0.2222222222222222
+Weighted-Average F1 Score: 0.3333333333333333
+
+========================================
+(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[42  0  0]
+ [ 2 14  0]
+ [ 2  0 24]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.913043  1.000000  0.954545
+Chinstrap   1.000000  0.875000  0.933333
+Gentoo      1.000000  0.923077  0.960000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9523809523809523
+Macro-Average F1 Score: 0.9492929292929292
+Weighted-Average F1 Score: 0.952193362193362
+
+========================================
+PENGUIN base_dt
+	Average accuracy: 0.980952380952381
+	Variance accuracy: 0.00026077097505669024
+	Average macro_average: 0.9813357573007986
+	Variance macro_average: 0.00030058586360513616
+	Average weighted_average: 0.980998473533143
+	Variance weighted_average: 0.00025964640636928803
+PENGUIN top_dt
+	Average accuracy: 0.9761904761904763
+	Variance accuracy: 0.00022675736961451349
+	Average macro_average: 0.9745413221745635
+	Variance macro_average: 0.0002625449878733171
+	Average weighted_average: 0.9760950284363965
+	Variance weighted_average: 0.0002282061681857685
+PENGUIN base_mlp
+	Average accuracy: 0.4357142857142858
+	Variance accuracy: 0.0023015873015873015
+	Average macro_average: 0.20179562264368647
+	Variance macro_average: 0.00024815482604185395
+	Average weighted_average: 0.26604170349751205
+	Variance weighted_average: 0.002375755616238293
+PENGUIN top_mlp
+	Average accuracy: 0.9761904761904763
+	Variance accuracy: 0.00022675736961451349
+	Average macro_average: 0.9745413221745635
+	Variance macro_average: 0.0002625449878733171
+	Average weighted_average: 0.9760950284363965
+	Variance weighted_average: 0.0002282061681857685
+========================================
+(A) Base-DT
+
+(B) Confusion Matrix
+[[35  2  1]
+ [ 1 16  0]
+ [ 0  0 29]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.972222  0.921053  0.945946
+Chinstrap   0.888889  0.941176  0.914286
+Gentoo      0.966667  1.000000  0.983051
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9523809523809523
+Macro-Average F1 Score: 0.9477608358964291
+Weighted-Average F1 Score: 0.9523485436318366
+
+========================================
+(A) Top-DT {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 4}
+
+(B) Confusion Matrix
+[[35  2  1]
+ [ 1 16  0]
+ [ 1  0 28]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.945946  0.921053  0.933333
+Chinstrap   0.888889  0.941176  0.914286
+Gentoo      0.965517  0.965517  0.965517
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9404761904761905
+Macro-Average F1 Score: 0.937712096332786
+Weighted-Average F1 Score: 0.9405895691609978
+
+========================================
+(A) Base-MLP
+
+(B) Confusion Matrix
+[[38  0  0]
+ [17  0  0]
+ [29  0  0]]
+
+(C) Precision, Recall, F1 Score
+           precision  recall  f1-score
+Adelie      0.452381     1.0  0.622951
+Chinstrap   0.000000     0.0  0.000000
+Gentoo      0.000000     0.0  0.000000
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.4523809523809524
+Macro-Average F1 Score: 0.20765027322404372
+Weighted-Average F1 Score: 0.2818110850897736
+
+========================================
+(A) Top-MLP {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}
+
+(B) Confusion Matrix
+[[35  2  1]
+ [ 1 16  0]
+ [ 1  0 28]]
+
+(C) Precision, Recall, F1 Score
+           precision    recall  f1-score
+Adelie      0.945946  0.921053  0.933333
+Chinstrap   0.888889  0.941176  0.914286
+Gentoo      0.965517  0.965517  0.965517
+
+(D) Accuracy, Macro-Average F1 Score, Weighted-Average F1 Score
+Accuracy: 0.9404761904761905
+Macro-Average F1 Score: 0.937712096332786
+Weighted-Average F1 Score: 0.9405895691609978
 
 ========================================
 PENGUIN base_dt
 	Average accuracy: 0.9761904761904763
-	Variance accuracy: 0.0001700680272108842
-	Average macro_average: 0.9739321312026756
-	Variance macro_average: 0.0002073458220218813
-	Average weighted_average: 0.9763481254753028
-	Variance weighted_average: 0.00016825584494137286
+	Variance accuracy: 0.0003306878306878318
+	Average macro_average: 0.975739937066737
+	Variance macro_average: 0.00040705424013061186
+	Average weighted_average: 0.9762234852162587
+	Variance weighted_average: 0.00033037457243965165
 PENGUIN top_dt
-	Average accuracy: 0.9619047619047618
-	Variance accuracy: 0.0007596371882086174
-	Average macro_average: 0.9581587389217574
-	Variance macro_average: 0.0008283933378793442
-	Average weighted_average: 0.9620558844182183
-	Variance weighted_average: 0.0007831026126107483
+	Average accuracy: 0.9702380952380953
+	Variance accuracy: 0.00036611866969009935
+	Average macro_average: 0.9684031178676005
+	Variance macro_average: 0.00040717525046452143
+	Average weighted_average: 0.9701774518904966
+	Variance weighted_average: 0.00036526036770438914
 PENGUIN base_mlp
-	Average accuracy: 0.43095238095238103
-	Variance accuracy: 0.0018934240362811778
-	Average macro_average: 0.20035870261656755
-	Variance macro_average: 0.0001888291465686902
-	Average weighted_average: 0.26082865405505934
-	Variance weighted_average: 0.0020992614896835175
+	Average accuracy: 0.43849206349206354
+	Variance accuracy: 0.001956569664902998
+	Average macro_average: 0.20277139774041267
+	Variance macro_average: 0.00021155637356516684
+	Average weighted_average: 0.268669933762889
+	Variance weighted_average: 0.0020143343185044602
 PENGUIN top_mlp
-	Average accuracy: 0.9619047619047618
-	Variance accuracy: 0.0007596371882086174
-	Average macro_average: 0.9581587389217574
-	Variance macro_average: 0.0008283933378793442
-	Average weighted_average: 0.9620558844182183
-	Variance weighted_average: 0.0007831026126107483
+	Average accuracy: 0.9702380952380953
+	Variance accuracy: 0.00036611866969009935
+	Average macro_average: 0.9684031178676005
+	Variance macro_average: 0.00040717525046452143
+	Average weighted_average: 0.9701774518904966
+	Variance weighted_average: 0.00036526036770438914
